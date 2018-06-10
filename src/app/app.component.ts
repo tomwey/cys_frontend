@@ -5,14 +5,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
-import { RedpackDetailPage } from '../pages/redpack-detail/redpack-detail';
 import { Users } from '../provider/Users';
 import { Utils } from '../provider/Utils';
 import { Tools } from '../provider/Tools';
 import { AppManager } from '../provider/AppManager';
 
-import { RedpackOwnerScanPage } from '../pages/redpack-owner-scan/redpack-owner-scan';
-import { UserScanRedpackPage } from '../pages/user-scan-redpack/user-scan-redpack';
+// import { UserScanRedpackPage } from '../pages/user-scan-redpack/user-scan-redpack';
 import { Wechat } from '../provider/Wechat';
 
 @Component({
@@ -98,11 +96,11 @@ export class MyApp {
       this.appManager.shareData = params;
 
       if (params.rid) { // ?rid=1234 跳转到红包详情
-        this.rootPage = RedpackDetailPage;
+        // this.rootPage = RedpackDetailPage;
       } else if (params.rrid) { // ?rrid=18303030 商家扫用户确认消费抵扣
-        this.rootPage = RedpackOwnerScanPage;
+        // this.rootPage = RedpackOwnerScanPage;
       } else if (params.uid) { // ?uid=4948484 用户扫商家的二维码抢红包
-        this.rootPage = UserScanRedpackPage;
+        // this.rootPage = UserScanRedpackPage;
       } else {
         this.rootPage = TabsPage;
       }
