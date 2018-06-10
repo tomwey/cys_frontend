@@ -7,15 +7,12 @@ import { HttpModule } from '@angular/http';
 
 import { MyApp } from './app.component';
 
-import { RedpackDetailPage } from '../pages/redpack-detail/redpack-detail';
 import { LoginPage } from '../pages/login/login';
-import { NewRedpackPage } from '../pages/new-redpack/new-redpack';
-import { RedpackListPage } from '../pages/redpack-list/redpack-list';
 import { SettingPage } from '../pages/setting/setting';
 import { TabsPage } from '../pages/tabs/tabs';
-
-import { RedpackOwnerScanPage} from '../pages/redpack-owner-scan/redpack-owner-scan';
-import { UserScanRedpackPage } from '../pages/user-scan-redpack/user-scan-redpack';
+import { HomePage } from '../pages/home/home'; 
+import { MediaListPage } from '../pages/media-list/media-list';
+import { TopicListPage } from '../pages/topic-list/topic-list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -35,14 +32,12 @@ import { jsClipboard } from '../provider/jsClipboard';
 @NgModule({
   declarations: [
     MyApp,
-    NewRedpackPage,
-    RedpackDetailPage,
-    RedpackListPage,
+    HomePage,
+    MediaListPage,
+    TopicListPage,
     SettingPage,
     TabsPage,
     LoginPage,
-    RedpackOwnerScanPage,
-    UserScanRedpackPage,
   ],
   imports: [
     BrowserModule,
@@ -56,14 +51,12 @@ import { jsClipboard } from '../provider/jsClipboard';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    NewRedpackPage,
-    RedpackListPage,
-    RedpackDetailPage,
+    HomePage,
+    MediaListPage,
+    TopicListPage,
     SettingPage,
     TabsPage,
     LoginPage,
-    RedpackOwnerScanPage,
-    UserScanRedpackPage,
   ],
   providers: [
     StatusBar,

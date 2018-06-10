@@ -15,6 +15,7 @@ $app-direction: ltr;
 @import "ionic.globals";
 
 @import "../assets/fonts/iconfont";
+@import "../assets/fonts/cys_icon";
 
 // Shared Variables
 // --------------------------------------------------
@@ -35,7 +36,7 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #BD5450,// #488aff,
+  primary:    #5AC59F,// #488aff,
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,

@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 
-import { NewRedpackPage } from '../new-redpack/new-redpack';
-import { RedpackListPage } from '../redpack-list/redpack-list';
+import { HomePage } from '../home/home'; 
+import { MediaListPage } from '../media-list/media-list';
+import { TopicListPage } from '../topic-list/topic-list';
+
 import { SettingPage } from '../setting/setting';
 
 @Component({
@@ -9,9 +11,10 @@ import { SettingPage } from '../setting/setting';
 })
 export class TabsPage {
 
-  tab1Root = NewRedpackPage;
-  tab2Root = RedpackListPage;
-  tab3Root = SettingPage;
+  tab1Root = HomePage;
+  tab2Root = MediaListPage;
+  tab3Root = TopicListPage;
+  tab4Root = SettingPage;
 
   constructor() {
 
