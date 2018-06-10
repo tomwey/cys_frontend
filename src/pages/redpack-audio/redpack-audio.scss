@@ -1,0 +1,46 @@
+page-redpack-audio {
+    .themes-box {
+        ion-row, ion-col {
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    .menu-item {
+        background: white;
+        text-align: center;
+        width: 100%;
+        padding: 15px 0;
+        border-top: 0.55px solid rgb(241,241,241);
+        font-size: 14px;
+        color: #666;
+
+        &.active {
+            background:rgb(241,241,241);
+            color: color($colors, primary);
+            border-left: 2px solid color($colors, primary);
+        }
+    }
+
+    .main-content {
+        ion-row, ion-col {
+            margin: 0!important;
+            padding: 0!important;
+        }
+
+        .custom-card {
+            box-shadow: none;
+            -webkit-box-shadow: none;
+            &.active {
+                border: 0.55px solid color($colors, primary);
+            }
+        }
+
+    }
+
+    .theme-custom {
+        padding: 30px;
+        text-align: center;
+        color: #666;
+    }
+}

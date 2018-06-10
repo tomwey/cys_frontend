@@ -1,0 +1,42 @@
+page-user-scan-redpack {
+    .body {
+        width: 100%;
+        background: black;
+        .cover {
+            display: block;
+            max-width: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+    }
+
+    .input-sign-box {
+        // border: 1px dashed #e6e6e6;
+        margin-bottom: 20px;
+        // padding: 10px;
+        ion-input {
+            border: 1px dashed #e6e6e6;
+            padding: 0 10px;
+            // color: color($colors, primary);
+        }
+        .help-hint {
+            margin: 0;
+            padding: 0;
+            padding: 5px 0;
+            color: #666;
+        }
+    }
+
+    .image-loader {
+        background:rgb(241,241,241);
+        width: 100%;
+        padding: 30px;
+        text-align: center;
+    }
+
+    ion-footer {
+        background: white;
+    }
+}

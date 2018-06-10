@@ -1,0 +1,50 @@
+<!--
+  Generated template for the RedpackHistoryPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header no-border>
+
+  <ion-navbar color="primary">
+    <ion-title>红包详情</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <div class="user-info" *ngIf="!!user">
+    <img [src]="user.avatar" class="avatar" />
+    <h2 class="name">{{user.nickname}} <span class="pin" *ngIf="redpack && redpack.is_pin">拼</span></h2>
+    <p class="hb-subject" text-wrap *ngIf="!!redpack">{{redpack.subject || '恭喜发财，大吉大利'}}</p>
+  </div>
+  
+  <div class="earnings" *ngIf="!!redpack_earn">
+    <p class="money">{{redpack_earn.money}} <span class="unit">元</span></p>
+    <p class="help-text">{{redpack_earn.is_cash ? '已存入钱包，可直接提现' : '消费红包，可直接抵扣'}}</p>
+    <!-- 消费二维码 -->
+    <img [src]="redpack_earn.qrcode_url" class="qrcode-img" *ngIf="redpack_earn && redpack_earn.qrcode_url" />
+    <p class="help-text">向商家出示此二维码，商家扫码确认消费</p>
+  </div>
+
+  <p class="hb-summary" text-wrap *ngIf="!!redpack">{{!redpack_earn ? 
+    redpack.total_count + '个'+ (redpack.is_cash ? '现金' : '消费') +'红包共' + redpack.total_money + '元' : 
+    '领取'+ redpack.sent_count + '/' + redpack.total_count +'个'}}</p>
+  
+  <!-- 加载数据出错显示 -->
+  <div class="empty-error-box" *ngIf="!!dataError">{{dataError}}</div>
+
+  <!-- 红包历史 -->
+  <ion-list>
+    <ion-item *ngFor="let item of results">
+      <ion-avatar item-left>
+        <img [src]="item.user.avatar" />
+      </ion-avatar>
+      <h2 text-wrap>{{item.user.nickname}}</h2>
+      <p>{{item.time}}</p>
+      <ion-note item-right>
+        {{item.money}} 元
+      </ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>

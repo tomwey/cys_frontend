@@ -1,0 +1,38 @@
+page-redpack-created {
+    .result-box {
+        padding: 20px;
+    }
+
+    .help-text {
+        margin: 0;
+        padding: 0;
+        margin-bottom: 10px;
+        font-size: 14px;
+        color: #333;
+        text-align: center;
+    }
+
+    .cover {
+        width: 61.8%;
+        margin: 0 auto;
+        margin-top: 10px;
+        img {
+            max-width: 100%;
+            width: 100%;
+            height: auto;
+            border: 0;
+        }
+    }
+
+    .detail-url {
+        width: 90%;
+        padding: 20px;
+        margin: 0 auto;
+        margin-top: 30px;
+        border: 2px dashed #ccc;
+
+        .item-ios.item-block .item-inner {
+            border-bottom: 0;
+        }
+    }
+}

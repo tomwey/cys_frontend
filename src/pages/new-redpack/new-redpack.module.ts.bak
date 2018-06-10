@@ -1,0 +1,13 @@
+import { NgModule } from '@angular/core';
+import { IonicPageModule } from 'ionic-angular';
+import { NewRedpackPage } from './new-redpack';
+
+@NgModule({
+  declarations: [
+    NewRedpackPage,
+  ],
+  imports: [
+    IonicPageModule.forChild(NewRedpackPage),
+  ],
+})
+export class NewRedpackPageModule {}
