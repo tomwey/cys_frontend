@@ -26,7 +26,7 @@
     {{error.message || error}}
   </div>
   <div class="media-data">
-    <ion-card *ngFor="let media of mediaData">
+    <ion-card *ngFor="let media of mediaData" (tap)="selectMedia(media)" tappable>
       <ion-item>
         <ion-avatar item-start>
           <img [src]="media.cover" />

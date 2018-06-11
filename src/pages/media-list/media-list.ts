@@ -46,6 +46,9 @@ export class MediaListPage {
 
   selectItem(type) {
     this.dataType = type;
+    this.pageNum = 1;
+    this.mediaData = [];
+    this.loadData();
   }
 
   loadData() {
@@ -94,6 +97,10 @@ export class MediaListPage {
         e.complete();
       });
     }
+  }
+
+  selectMedia(media) {
+    
   }
 
 }
