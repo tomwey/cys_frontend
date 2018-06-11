@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { /*IonicPage, */NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { /*IonicPage, */NavController, NavParams, Slides, App } from 'ionic-angular';
+import { ApiService } from '../../provider/api-service';
 
 /**
  * Generated class for the HomePage page.
@@ -15,11 +16,65 @@ import { /*IonicPage, */NavController, NavParams } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  entryData: any = null;
+  error: any = null;
+
+  @ViewChild(Slides) slides: Slides;
+
+  constructor(public navCtrl: NavController, 
+    private api: ApiService,
+    private app: App,
+    public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HomePage');
+    // console.log('ionViewDidLoad HomePage');
+    this.loadData();
+  }
+
+  loadData() {
+    this.api.GET('entry', null, '正在加载')
+      .then(data => {
+        if (data && data['data']) {
+          this.entryData = data['data'];
+
+          if (this.slides) {
+            this.slides.autoplayDisableOnInteraction = false;
+
+            this.slides.ngOnDestroy();
+            this.slides.initialSlide = 0;
+            this.slides.update();
+            this.slides.ngAfterContentInit();
+          }
+        }
+      })
+      .catch(error => {
+        this.error = error;
+      });
+  }
+
+  ionViewDidEnter() {
+    if (this.slides) {
+      this.slides.startAutoplay();
+    }
+  }
+
+  ionViewDidLeave() {   
+    if (this.slides) {
+      this.slides.stopAutoplay();  
+    }
+  }
+
+  autoPlay() {
+    if (this.entryData && this.entryData.banners.length > 1 && this.slides) {
+      this.slides.startAutoplay();
+    }
+
+  }
+
+  openBanner(banner) {
+    // this.app.getRootNavs()[0].push('CloudZoneDetailPage', banner);
+    // this.app.getRootNavs()[0].push('ArticlePage', { id: banner.ContentID });
   }
 
 }

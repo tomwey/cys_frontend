@@ -12,8 +12,8 @@ import { Tools } from './Tools';
   for more info on providers and Angular 2 DI.
 */
 // 正式服务器和账号
-const API_HOST: string = "http://hhd.afterwind.cn/api/v1";
-const API_KEY:  string = "c896833925be9f17633ffc386c97b1bb";
+const API_HOST: string = "http://cys.afterwind.cn/api/v1";
+const API_KEY:  string = "c2fb2548ed4460dd10c7f62b33d9082e";
 
 // 测试账号和测试服务器
 // const API_HOST: string = "http://0.0.0.0:8888/api/v1";
