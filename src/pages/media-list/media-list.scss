@@ -2,14 +2,24 @@ page-media-list {
     .media-data {
         ion-card {
             box-shadow: none;
+            ion-card-content {
+                // padding-top: 5px;
+                padding-bottom: 0!important;
+            }
         }
-        ion-row,ion-col {
+        ion-row {
             margin: 0;
             padding: 0;
             // text-align: center;
             button {
                 color: #666;
             }
+        }
+
+        ion-col {
+            margin: 0;
+            padding-top: 0;
+            padding-bottom: 0;
         }
     }
 
