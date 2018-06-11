@@ -1,3 +1,30 @@
 page-media-list {
+    .media-data {
+        ion-card {
+            box-shadow: none;
+        }
+        ion-row,ion-col {
+            margin: 0;
+            padding: 0;
+            // text-align: center;
+            button {
+                color: #666;
+            }
+        }
+    }
 
+    .custom-btn {
+        font-size: 14px;
+        color: #666;
+        padding: 5px;
+        &.active {
+            font-size: 16px;
+            font-weight: bold;
+        }
+    }
+
+    .school-btn {
+        font-size: 14px;
+        color: #666!important;
+    }
 }

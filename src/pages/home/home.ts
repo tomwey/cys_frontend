@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-import { /*IonicPage, */NavController, NavParams, Slides, App } from 'ionic-angular';
+import { /*IonicPage, */NavController, NavParams, Slides, App, Content } from 'ionic-angular';
 import { ApiService } from '../../provider/api-service';
+import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 
 /**
  * Generated class for the HomePage page.
@@ -20,15 +21,19 @@ export class HomePage {
   error: any = null;
 
   @ViewChild(Slides) slides: Slides;
+  @ViewChild(Content) content: Content;
 
   constructor(public navCtrl: NavController, 
     private api: ApiService,
-    private app: App,
+    // private app: App,
+    private iosFixed: iOSFixedScrollFreeze,
     public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad HomePage');
+    this.iosFixed.fixedScrollFreeze(this.content);
+
     this.loadData();
   }
 

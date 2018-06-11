@@ -26,6 +26,7 @@ import { Pays } from '../provider/Pays';
 import { Wechat } from '../provider/Wechat';
 import { iOSFixedScrollFreeze } from '../provider/iOSFixedScrollFreeze';
 import { jsClipboard } from '../provider/jsClipboard';
+import { Media } from '../provider/Media';
 // import { APIs } from '../provider/APIs';
 // import { ApiService } from '../provider/api-service';
 
@@ -74,6 +75,7 @@ import { jsClipboard } from '../provider/jsClipboard';
     Wechat,
     iOSFixedScrollFreeze,
     jsClipboard,
+    Media,
   ]
 })
 export class AppModule {}
