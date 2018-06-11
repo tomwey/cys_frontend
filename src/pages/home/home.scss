@@ -131,6 +131,20 @@ page-home {
             box-shadow: none;
         }
 
+        .title, .view-count {
+            font-size: 14px;
+            color: #333;
+            padding: 5px 0;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .view-count {
+            text-align: right;
+            
+        }
+
         .card-title {
             font-size: 14px;
             padding: 5px 0;

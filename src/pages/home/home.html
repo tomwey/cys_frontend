@@ -84,19 +84,46 @@
       <div class="media">
         <ion-card>
           <img [src]="sec.list[0].cover" />
-          <div class="card-title">{{sec.list[0].title}}</div>
+          <ion-row>
+            <ion-col col-8>
+              <p class="title">{{sec.list[0].title}}</p>
+            </ion-col>
+            <ion-col col-4>
+              <p class="view-count">
+                <ion-icon name="ios-videocam-outline"></ion-icon> 
+                <span class="digit">{{sec.list[0].views_count}}</span></p>
+            </ion-col>
+          </ion-row>
         </ion-card>
         <ion-row>
           <ion-col col-6 class="media-left">
               <ion-card>
                 <img [src]="sec.list[1].cover" />
-                <div class="card-title">{{sec.list[1].title}}</div>
+                <ion-row>
+                    <ion-col col-6>
+                      <p class="title">{{sec.list[1].title}}</p>
+                    </ion-col>
+                    <ion-col col-6>
+                      <p class="view-count">
+                        <ion-icon name="ios-videocam-outline"></ion-icon> 
+                        <span class="digit">{{sec.list[1].views_count}}</span></p>
+                    </ion-col>
+                  </ion-row>
               </ion-card>
           </ion-col>
           <ion-col col-6 class="media-right">
               <ion-card>
                 <img [src]="sec.list[2].cover" />
-                <div class="card-title">{{sec.list[2].title}}</div>
+                <ion-row>
+                    <ion-col col-6>
+                      <p class="title">{{sec.list[2].title}}</p>
+                    </ion-col>
+                    <ion-col col-6>
+                      <p class="view-count">
+                        <ion-icon name="ios-videocam-outline"></ion-icon> 
+                        <span class="digit">{{sec.list[2].views_count}}</span></p>
+                    </ion-col>
+                  </ion-row>
               </ion-card>
           </ion-col>
         </ion-row>
