@@ -31,11 +31,30 @@
         <ion-avatar item-start>
           <img [src]="media.cover" />
         </ion-avatar>
-        <h2>{{media.owner.name}}</h2>
-        <p>{{media.owner.school}}</p>
+        <h2>{{media.owner && media.owner.name}}</h2>
+        <p>{{media.owner && media.owner.school}}</p>
       </ion-item>
 
-      <img [src]="media.cover" />
+      <!-- <img [src]="media.cover" /> -->
+
+      <vg-player>
+          <vg-overlay-play></vg-overlay-play>
+          <vg-buffering></vg-buffering>
+          <!-- <vg-controls [vgAutohide]="true" [vgAutohideTime]="5">
+            <vg-play-pause></vg-play-pause>
+            <vg-time-display [vgProperty]="'current'"></vg-time-display>
+            <vg-scrub-bar>
+              <vg-scrub-bar-current-time [vgSlider]="true"></vg-scrub-bar-current-time>
+              <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+            </vg-scrub-bar>
+            <vg-time-display [vgProperty]="'total'"></vg-time-display>
+            <vg-fullscreen></vg-fullscreen>
+          </vg-controls> -->
+          <video #myMedia [vgMedia]="myMedia" 
+            poster="{{media.cover}}" 
+            src="{{media.media_file}}"></video>
+        </vg-player>
+
       <ion-card-content>
         <p>{{media.title}}</p>
       </ion-card-content>

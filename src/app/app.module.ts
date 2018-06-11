@@ -27,6 +27,12 @@ import { Wechat } from '../provider/Wechat';
 import { iOSFixedScrollFreeze } from '../provider/iOSFixedScrollFreeze';
 import { jsClipboard } from '../provider/jsClipboard';
 import { Media } from '../provider/Media';
+
+import {VgCoreModule} from 'videogular2/core';
+import {VgControlsModule} from 'videogular2/controls';
+import {VgOverlayPlayModule} from 'videogular2/overlay-play';
+import {VgBufferingModule} from 'videogular2/buffering';
+
 // import { APIs } from '../provider/APIs';
 // import { ApiService } from '../provider/api-service';
 
@@ -38,7 +44,7 @@ import { Media } from '../provider/Media';
     TopicListPage,
     SettingPage,
     TabsPage,
-    LoginPage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -47,7 +53,11 @@ import { Media } from '../provider/Media';
     IonicModule.forRoot(MyApp, {
       mode: 'ios',
       backButtonText: '',
-    })
+    }),
+    VgCoreModule,
+    VgControlsModule,
+    VgOverlayPlayModule,
+    VgBufferingModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
