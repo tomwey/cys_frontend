@@ -3,6 +3,7 @@ import { /*IonicPage, */NavController, NavParams, Content } from 'ionic-angular'
 import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 import { Media } from '../../provider/Media';
 import { Tools } from '../../provider/Tools';
+import { VgAPI } from 'videogular2/core';
 
 /**
  * Generated class for the MediaListPage page.
@@ -28,6 +29,8 @@ export class MediaListPage {
   mediaData: any = [];
 
   hasMore: boolean = false;
+
+  currentMedia: any = null;
   
   @ViewChild(Content) content: Content;
 
@@ -35,6 +38,7 @@ export class MediaListPage {
     private iosFixed: iOSFixedScrollFreeze,
     private media: Media,
     private tools: Tools,
+    private mediaAPI: VgAPI,
     public navParams: NavParams) {
   }
 
@@ -48,6 +52,12 @@ export class MediaListPage {
     this.dataType = type;
     this.pageNum = 1;
     this.mediaData = [];
+    
+    if (this.currentMedia) {
+      this.currentMedia.pause();
+      this.currentMedia = null;
+    }
+
     this.loadData();
   }
 
@@ -100,7 +110,26 @@ export class MediaListPage {
   }
 
   selectMedia(media) {
+
+  }
+
+  playVideo(myMedia) {
+    if (this.currentMedia) {
+      this.currentMedia.pause();
+    }
+
+    myMedia.play();
+    this.currentMedia = myMedia;
     
+  }
+
+  onPlayerReady(api: VgAPI) {
+    api.getDefaultMedia().subscriptions.ended.subscribe(
+      () => {
+          // Set the video to the beginning
+          api.getDefaultMedia().currentTime = 0;
+      }
+    );
   }
 
 }

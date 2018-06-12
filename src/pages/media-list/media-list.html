@@ -36,9 +36,20 @@
       </ion-item>
 
       <!-- <img [src]="media.cover" /> -->
-
-      <vg-player>
-          <vg-overlay-play></vg-overlay-play>
+      <div class="media-player">
+        
+      <vg-player (onPlayerReady)="onPlayerReady($event)">
+          <div class="custom-play-button" (tap)="currentMedia && currentMedia !== myMedia && currentMedia.pause(); media.playing ? myMedia.pause() : myMedia.play();currentMedia = myMedia;media.playing = !media.playing;">
+            <button ion-button clear color="white" 
+              class="play-button">
+              <ion-icon name="ios-play-outline" *ngIf="currentMedia !== myMedia"></ion-icon>
+            </button>
+          </div>
+          <!-- <vg-overlay-play>
+              <button ion-button clear color="white" class="play-button">
+                  <ion-icon name="ios-play-outline"></ion-icon>
+                </button>
+          </vg-overlay-play> -->
           <vg-buffering></vg-buffering>
 
           <!-- <vg-controls> -->
@@ -61,9 +72,11 @@
           </vg-controls> -->
           <video #myMedia [vgMedia]="myMedia" 
             playsinline webkit-playsinline
+            id="vid-{{media.id}}"
             poster="{{media.cover}}" 
             src="{{media.media_file}}"></video>
         </vg-player>
+      </div>
 
       <ion-card-content>
         <p>{{media.title}}</p>

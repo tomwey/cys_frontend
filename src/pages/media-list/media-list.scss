@@ -38,6 +38,7 @@ page-media-list {
         color: #666!important;
     }
 
+    // 以下为自定义loading spinner样式
     vg-scrub-bar {
         position: absolute;
         bottom: 0;
@@ -45,13 +46,29 @@ page-media-list {
         vg-scrub-bar-current-time,vg-scrub-bar-buffering-time {
             height: 1px;
         }
-
-        // vg-scrub-bar-buffering-time {
-        //     background: color($colors, primary);
-        // }
     }
 
     .vg-buffering .bufferingContainer {
         margin-top: -25px;
+    }
+
+    .vg-buffering .loadingSpinner {
+        border: 2px solid rgba(255, 255, 255, 1);
+        border-top: 2px solid rgba(0, 0, 0, 0);
+        border-left: 2px solid rgba(0, 0, 0, 0);
+    }
+
+    .media-player {
+        .custom-play-button {
+            position: absolute;
+            z-index: 200;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            padding-top: 20px;
+            .play-button {
+                font-size: 50px;
+            }
+        }
     }
 }
