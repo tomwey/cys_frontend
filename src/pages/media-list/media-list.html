@@ -40,6 +40,15 @@
       <vg-player>
           <vg-overlay-play></vg-overlay-play>
           <vg-buffering></vg-buffering>
+
+          <!-- <vg-controls> -->
+            <vg-scrub-bar [vgSlider]="false" style="pointer-events: none;">
+                <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+            </vg-scrub-bar>
+          <!-- </vg-controls> -->
+          
+
           <!-- <vg-controls [vgAutohide]="true" [vgAutohideTime]="5">
             <vg-play-pause></vg-play-pause>
             <vg-time-display [vgProperty]="'current'"></vg-time-display>
@@ -51,6 +60,7 @@
             <vg-fullscreen></vg-fullscreen>
           </vg-controls> -->
           <video #myMedia [vgMedia]="myMedia" 
+            playsinline webkit-playsinline
             poster="{{media.cover}}" 
             src="{{media.media_file}}"></video>
         </vg-player>

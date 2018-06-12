@@ -37,4 +37,21 @@ page-media-list {
         font-size: 14px;
         color: #666!important;
     }
+
+    vg-scrub-bar {
+        position: absolute;
+        bottom: 0;
+        height: 1px;
+        vg-scrub-bar-current-time,vg-scrub-bar-buffering-time {
+            height: 1px;
+        }
+
+        // vg-scrub-bar-buffering-time {
+        //     background: color($colors, primary);
+        // }
+    }
+
+    .vg-buffering .bufferingContainer {
+        margin-top: -25px;
+    }
 }
