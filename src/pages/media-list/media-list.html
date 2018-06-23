@@ -26,7 +26,7 @@
     {{error.message || error}}
   </div>
   <div class="media-data">
-    <ion-card *ngFor="let media of mediaData" (tap)="selectMedia(media)" tappable>
+    <ion-card *ngFor="let media of mediaData" tappable (click)="selectMedia(media)" tappable>
       <ion-item>
         <ion-avatar item-start>
           <img [src]="media.cover" />
@@ -38,12 +38,13 @@
         </ion-note>
       </ion-item>
 
+    <div class="media-player">
       <vg-player (onPlayerReady)="onPlayerReady($event)">
-          <div class="custom-play-button" (tap)="currentMedia && currentMedia !== myMedia && 
-            currentMedia.pause(); media.playing ? myMedia.pause() : myMedia.play();currentMedia = myMedia;media.playing = !media.playing;">
+          <div class="custom-play-button" tappable (click)="currentMedia && currentMedia !== myMedia && 
+            currentMedia.pause(); media.playing ? myMedia.pause() : myMedia.play();currentMedia = myMedia;media.playing = !media.playing;$event.stopPropagation();">
             <button ion-button clear color="white" 
               class="play-button">
-              <ion-icon name="ios-play-outline" *ngIf="currentMedia !== myMedia || !media.playing"></ion-icon>
+              <ion-icon name="play" *ngIf="currentMedia !== myMedia || !media.playing"></ion-icon>
             </button>
           </div>
           <!-- <vg-overlay-play>
@@ -81,6 +82,7 @@
             poster="{{media.cover}}" 
             src="{{media.media_file}}"></video>
         </vg-player>
+      </div>
 
       <!-- <div class="android-player" *ngIf="isAndroid">
           <div class="custom-play-button" (tap)="playAndroidVideo(media.id);">
@@ -116,7 +118,7 @@
           </button>
         </ion-col>
         <ion-col col-4 style="text-align:right;">
-          <button ion-button icon-start clear small>
+          <button ion-button icon-start clear small (click)="like($event,media);">
             <ion-icon name="thumbs-up"></ion-icon>
             <div>{{media.likes_count}} 喜欢</div>
           </button>

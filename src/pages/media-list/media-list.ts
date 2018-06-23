@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { /*IonicPage, */NavController, NavParams, Content } from 'ionic-angular';
+import { /*IonicPage, */NavController, NavParams, Content, App } from 'ionic-angular';
 import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 import { Media } from '../../provider/Media';
 import { Tools } from '../../provider/Tools';
@@ -40,6 +40,7 @@ export class MediaListPage {
     private iosFixed: iOSFixedScrollFreeze,
     private media: Media,
     private tools: Tools,
+    private app: App,
     public navParams: NavParams) {
   }
 
@@ -111,7 +112,13 @@ export class MediaListPage {
   }
 
   selectMedia(media) {
+    this.app.getRootNavs()[0].push('MediaDetailPage', media);
+  }
 
+  like(ev:Event, media) {
+    console.log(ev);
+    ev.stopPropagation();
+    console.log(media);
   }
 
   onPlayerReady(api: VgAPI) {
