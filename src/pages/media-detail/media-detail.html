@@ -84,14 +84,44 @@
     </ion-list>
   </div>
   <div class="comments">
-    <h2>评论 {{media.comments_count}}</h2>
+    <h2 class="title">评论 {{media.comments_count}}</h2>
     <div class="empty-error-box" *ngIf="!!error">
       {{error}}
     </div>
     <ion-list>
-
+      <ion-item *ngFor="let comment of comments">
+        <ion-row>
+          <ion-col col-2>
+              <ion-avatar>
+                  <img [src]="comment.user.avatar || 'assets/imgs/default_avatar.png'">
+                </ion-avatar>
+          </ion-col>
+          <ion-col col-10>
+              <div class="body">
+                <div tappable (click)="reply(comment);">
+                  <h2>{{comment.user.nickname}}</h2>
+                  <p>{{comment.content}}</p>
+                  <p>{{comment.time}}</p>
+                </div>
+                <div class="replies">
+                  <p *ngFor="let reply of comment.replies" text-wrap>
+                    <span class="name">{{reply.from_user.nickname}}{{reply.to_user ? (' 回复 ' + reply.to_user.nickname )  : ''}}:</span> {{reply.content}}
+                  </p>
+                </div>
+              </div>
+          </ion-col>
+        </ion-row>
+        
+      </ion-item>
     </ion-list>
   </div>
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)" [enabled]="hasMore">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="正在加载...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 
 </ion-content>
 
@@ -99,7 +129,7 @@
   <ion-toolbar color="white">
     <div class="input-box"><ion-input [(ngModel)]="content" placeholder="说点什么"></ion-input></div>
       <ion-buttons end>
-        <button ion-button color="primary" [disabled]="!content">
+        <button ion-button color="primary" [disabled]="!content" (click)="send();">
           发送
         </button>
       </ion-buttons>

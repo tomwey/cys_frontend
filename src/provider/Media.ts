@@ -66,4 +66,63 @@ export class Media {
             });
         });
     }
+
+    GetComments(commentableType, commentableID, pageNum, pageSize) {
+        return new Promise((resolve, reject) => {
+            this.users.token().then(token => {
+                this.api.GET(`comments`, { 
+                    token: token, 
+                    comment_type: commentableType,
+                    comment_id: commentableID, 
+                    page: pageNum,
+                    size: pageSize
+                 })
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    })
+            });
+        });
+    }
+
+    CreateComment(commentableType, commentableID, content, address = null) {
+        return new Promise((resolve, reject) => {
+            this.users.token().then(token => {
+                this.api.POST(`comments/create`, { 
+                    token: token, 
+                    comment_type: commentableType,
+                    comment_id: commentableID, 
+                    content: content,
+                    address: address
+                 })
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    })
+            });
+        });
+    }
+
+    ReplyComment(commentID, content, to_user_id, address = null) {
+        return new Promise((resolve, reject) => {
+            this.users.token().then(token => {
+                this.api.POST(`comments/${commentID}/create_reply`, { 
+                    token: token, 
+                    to_user: to_user_id,
+                    content: content,
+                    address: address
+                 })
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    })
+            });
+        });
+    }
 }

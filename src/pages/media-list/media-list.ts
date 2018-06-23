@@ -112,9 +112,14 @@ export class MediaListPage {
   }
 
   selectMedia(media) {
-    this.currentMedia && this.currentMedia.pause();
-    this.currentMedia.srcMedia.playing = false;
-    
+    if (this.currentMedia) {
+      this.currentMedia.pause();
+
+      if (this.currentMedia.srcMedia) {
+        this.currentMedia.srcMedia.playing = false;
+      }
+    }
+
     this.app.getRootNavs()[0].push('MediaDetailPage', media);
   }
 
