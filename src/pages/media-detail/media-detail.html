@@ -103,9 +103,9 @@
                   <p>{{comment.content}}</p>
                   <p>{{comment.time}}</p>
                 </div>
-                <div class="replies">
-                  <p *ngFor="let reply of comment.replies" text-wrap>
-                    <span class="name">{{reply.from_user.nickname}}{{reply.to_user ? (' 回复 ' + reply.to_user.nickname )  : ''}}:</span> {{reply.content}}
+                <div class="replies" *ngIf="comment.replies.length > 0">
+                  <p class="reply" tappable (click)="reply(comment, rep.from_user.id);" *ngFor="let rep of comment.replies" text-wrap>
+                    <span class="name">{{rep.from_user.nickname}}{{rep.to_user ? (' 回复 ' + rep.to_user.nickname )  : ''}}:</span> {{rep.content}}
                   </p>
                 </div>
               </div>

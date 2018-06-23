@@ -82,6 +82,15 @@ page-media-detail {
             margin: 0;
             padding: 0;
         }
+
+        .replies {
+            background-color: rgb(247,247,247);
+            padding: 5px;
+            margin-top: 10px;
+            .reply {
+                color: #666;
+            }
+        }
         // margin-top: 10px;
     }
     
