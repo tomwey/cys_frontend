@@ -66,7 +66,7 @@
           <div>{{media.views_count}}</div>
         </button>
         <button ion-button icon-start clear small (click)="like($event,media);">
-          <ion-icon name="thumbs-up"></ion-icon>
+          <ion-icon name="md-heart" [class.liked]="media.liked"></ion-icon>
           <div>{{media.likes_count}}</div>
         </button>  
       </ion-note>

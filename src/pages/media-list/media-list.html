@@ -88,7 +88,7 @@
         <p>{{media.title}}</p>
       </ion-card-content>
 
-      <ion-row>
+      <ion-row style="margin-bottom: 5px;">
         <ion-col col-4>
           <button ion-button icon-start clear small>
             <ion-icon name="videocam"></ion-icon>
@@ -103,7 +103,7 @@
         </ion-col>
         <ion-col col-4 style="text-align:right;">
           <button ion-button icon-start clear small (click)="like($event,media);">
-            <ion-icon name="thumbs-up"></ion-icon>
+            <ion-icon name="md-heart" [class.liked]="media.liked"></ion-icon>
             <div>{{media.likes_count}} 喜欢</div>
           </button>
         </ion-col>

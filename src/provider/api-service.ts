@@ -16,8 +16,8 @@ const API_HOST: string = "http://cys.afterwind.cn/api/v1";
 const API_KEY:  string = "c2fb2548ed4460dd10c7f62b33d9082e";
 
 // 测试账号和测试服务器
-// const API_HOST: string = "http://0.0.0.0:8888/api/v1";
-// const API_KEY:  string = "1e3bb5a6e93148d7a6aa20ce181c1c46";
+// const API_HOST: string = "http://0.0.0.0:3000/api/v1";
+// const API_KEY:  string = "be96ef2e32664eba84fa6b8407fe8bc7";
 
 export interface ResultData {
   code: number,

@@ -24,4 +24,32 @@ export class Media {
             });
         });
     }
+
+    CreateLike(mediaID) {
+        return new Promise((resolve, reject) => {
+            this.users.token().then(token => {
+                this.api.POST(`likes/create`, { token: token, like_id: mediaID })
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    })
+            });
+        });
+    }
+
+    DeleteLike(mediaID) {
+        return new Promise((resolve, reject) => {
+            this.users.token().then(token => {
+                this.api.POST(`likes/delete`, { token: token, like_id: mediaID })
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    })
+            });
+        });
+    }
 }
