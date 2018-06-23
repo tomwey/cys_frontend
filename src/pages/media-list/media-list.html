@@ -39,7 +39,8 @@
       <div class="media-player" *ngIf="!isAndroid">
         
       <vg-player (onPlayerReady)="onPlayerReady($event)">
-          <div class="custom-play-button" (tap)="currentMedia && currentMedia !== myMedia && currentMedia.pause(); media.playing ? myMedia.pause() : myMedia.play();currentMedia = myMedia;media.playing = !media.playing;">
+          <div class="custom-play-button" (tap)="currentMedia && currentMedia !== myMedia && 
+            currentMedia.pause(); media.playing ? myMedia.pause() : myMedia.play();currentMedia = myMedia;media.playing = !media.playing;">
             <button ion-button clear color="white" 
               class="play-button">
               <ion-icon name="ios-play-outline" *ngIf="currentMedia !== myMedia || !media.playing"></ion-icon>

@@ -21,10 +21,12 @@ export class MediaListPage {
 
   dataType: string = 'latest';
 
+  // 分页
   pageNum: number = 1;
   totalPage: number = 1;
   pageSize: number = 20;
 
+  // 加载数据
   error: any = null;
   mediaData: any = [];
 
@@ -32,31 +34,23 @@ export class MediaListPage {
 
   currentMedia: any = null;
 
-  isAndroid: boolean = false;
-  
   @ViewChild(Content) content: Content;
 
   constructor(public navCtrl: NavController, 
     private iosFixed: iOSFixedScrollFreeze,
     private media: Media,
     private tools: Tools,
-    private mediaAPI: VgAPI,
     public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    // console.log('ionViewDidLoad MediaListPage');
-    // this.iosFixed.fixedScrollFreeze(this.content);
-
-    var u = navigator.userAgent;
-    this.isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
-
     this.loadData();
   }
 
   selectItem(type) {
     this.dataType = type;
     this.pageNum = 1;
+    this.totalPage = 1;
     this.mediaData = [];
     
     if (this.currentMedia) {
@@ -80,13 +74,14 @@ export class MediaListPage {
               this.error = "暂无数据";
             } else {
               this.error = null;
-              this.totalPage = (total + this.pageSize - 1) / this.pageSize;
             }
           } else {
             let temp = this.mediaData || [];
             this.mediaData = temp.concat(data);
             this.error = null;
           }
+
+          this.totalPage = (total + this.pageSize - 1) / this.pageSize;
           
           // this.totalPage = Math.floor((data.total + this.pageSize - 1) / this.pageSize); 
           this.hasMore = this.totalPage > this.pageNum;
@@ -105,10 +100,6 @@ export class MediaListPage {
     });
   }
 
-  playAndroidVideo(vid) {
-    
-  }
-
   loadMore(e) {
     if (this.pageNum < this.totalPage) {
       this.pageNum ++;
@@ -121,16 +112,6 @@ export class MediaListPage {
 
   selectMedia(media) {
 
-  }
-
-  playVideo(myMedia) {
-    if (this.currentMedia) {
-      this.currentMedia.pause();
-    }
-
-    myMedia.play();
-    this.currentMedia = myMedia;
-    
   }
 
   onPlayerReady(api: VgAPI) {
