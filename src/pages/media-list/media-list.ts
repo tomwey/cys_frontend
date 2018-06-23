@@ -31,6 +31,8 @@ export class MediaListPage {
   hasMore: boolean = false;
 
   currentMedia: any = null;
+
+  isAndroid: boolean = false;
   
   @ViewChild(Content) content: Content;
 
@@ -44,7 +46,11 @@ export class MediaListPage {
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad MediaListPage');
-    this.iosFixed.fixedScrollFreeze(this.content);
+    // this.iosFixed.fixedScrollFreeze(this.content);
+
+    var u = navigator.userAgent;
+    this.isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
+
     this.loadData();
   }
 
@@ -97,6 +103,10 @@ export class MediaListPage {
           resolve(false);
         });
     });
+  }
+
+  playAndroidVideo(vid) {
+    
   }
 
   loadMore(e) {

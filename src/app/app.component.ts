@@ -17,7 +17,7 @@ import { Wechat } from '../provider/Wechat';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any; //= TabsPage;
+  rootPage:any = TabsPage;
 
   constructor(platform: Platform, statusBar: StatusBar,
     private users: Users, 
@@ -31,6 +31,7 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
 
+      /*
       let rid = Utils.getQueryString('rid');
       let rrid = Utils.getQueryString('rsid');
       let uid = Utils.getQueryString('uid');
@@ -63,18 +64,10 @@ export class MyApp {
             this.rootPage = LoginPage;
           }
         } else {
-          // this.rootPage = TabsPage;
-          /*if (!rid) {
-            this.rootPage = TabsPage;
-          } else {
-            // 抢红包界面
-            // console.log(rid);
-            this.appManager.shareData = { rid: rid };
-            this.rootPage = RedpackDetailPage;
-          }*/
+          
           this.handlePageForward({ rid: rid, rrid: rrid, uid: uid });
         }
-      });
+      });*/
     });
   }
 

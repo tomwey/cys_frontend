@@ -32,7 +32,7 @@ export class HomePage {
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad HomePage');
-    this.iosFixed.fixedScrollFreeze(this.content);
+    // this.iosFixed.fixedScrollFreeze(this.content);
 
     this.loadData();
   }

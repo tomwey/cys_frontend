@@ -36,13 +36,13 @@
       </ion-item>
 
       <!-- <img [src]="media.cover" /> -->
-      <div class="media-player">
+      <div class="media-player" *ngIf="!isAndroid">
         
       <vg-player (onPlayerReady)="onPlayerReady($event)">
           <div class="custom-play-button" (tap)="currentMedia && currentMedia !== myMedia && currentMedia.pause(); media.playing ? myMedia.pause() : myMedia.play();currentMedia = myMedia;media.playing = !media.playing;">
             <button ion-button clear color="white" 
               class="play-button">
-              <ion-icon name="ios-play-outline" *ngIf="currentMedia !== myMedia"></ion-icon>
+              <ion-icon name="ios-play-outline" *ngIf="currentMedia !== myMedia || !media.playing"></ion-icon>
             </button>
           </div>
           <!-- <vg-overlay-play>
@@ -72,11 +72,32 @@
           </vg-controls> -->
           <video #myMedia [vgMedia]="myMedia" 
             playsinline webkit-playsinline
+            x-webkit-airplay="true" 
+            x5-video-player-type="h5"
+            x5-video-orientation="h5"
+
             id="vid-{{media.id}}"
             poster="{{media.cover}}" 
             src="{{media.media_file}}"></video>
         </vg-player>
+
       </div>
+
+      <!-- <div class="android-player" *ngIf="isAndroid">
+          <div class="custom-play-button" (tap)="playAndroidVideo(media.id);">
+              <button ion-button clear color="white" 
+                class="play-button">
+                <ion-icon name="ios-play-outline"></ion-icon>
+              </button>
+            </div>
+          <video id="video-{{media.id}}" x5-video-player-type="h5" 
+            x5-video-player-fullscreen="true" 
+            x-webkit-airplay="allow" 
+            webkit-playsinline playsinline  
+            poster="{{media.cover}}" 
+            src="{{media.media_file}}"></video>
+        <canvas id="canvas-{{media.id}}"></canvas>
+      </div> -->
 
       <ion-card-content>
         <p>{{media.title}}</p>
