@@ -15,11 +15,29 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class MediaDetailPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  media: any = null;
+
+  error: any = null;
+  comments: any = [];
+
+  // 评论内容
+  content: string = null;
+  
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams) {
+    this.media = this.navParams.data;
+    // console.log(this.media);
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MediaDetailPage');
+    // console.log('ionViewDidLoad MediaDetailPage');
+    setTimeout(() => {
+      this.loadComments();
+    }, 100);
+  }
+
+  loadComments() {
+    this.error = "暂无评论";
   }
 
 }

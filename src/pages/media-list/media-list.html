@@ -29,7 +29,7 @@
     <ion-card *ngFor="let media of mediaData" tappable (click)="selectMedia(media)" tappable>
       <ion-item>
         <ion-avatar item-start>
-          <img [src]="media.cover" />
+          <img [src]="media.owner?.avatar" />
         </ion-avatar>
         <h2>{{media.owner && media.owner.name}}</h2>
         <p>{{media.owner && media.owner.school}}</p>
@@ -83,22 +83,6 @@
             src="{{media.media_file}}"></video>
         </vg-player>
       </div>
-
-      <!-- <div class="android-player" *ngIf="isAndroid">
-          <div class="custom-play-button" (tap)="playAndroidVideo(media.id);">
-              <button ion-button clear color="white" 
-                class="play-button">
-                <ion-icon name="ios-play-outline"></ion-icon>
-              </button>
-            </div>
-          <video id="video-{{media.id}}" x5-video-player-type="h5" 
-            x5-video-player-fullscreen="true" 
-            x-webkit-airplay="allow" 
-            webkit-playsinline playsinline  
-            poster="{{media.cover}}" 
-            src="{{media.media_file}}"></video>
-        <canvas id="canvas-{{media.id}}"></canvas>
-      </div> -->
 
       <ion-card-content>
         <p>{{media.title}}</p>
