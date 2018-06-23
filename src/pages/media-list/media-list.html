@@ -33,11 +33,11 @@
         </ion-avatar>
         <h2>{{media.owner && media.owner.name}}</h2>
         <p>{{media.owner && media.owner.school}}</p>
+        <ion-note item-right>
+          06月30日 12:00
+        </ion-note>
       </ion-item>
 
-      <!-- <img [src]="media.cover" /> -->
-      <div class="media-player" *ngIf="!isAndroid">
-        
       <vg-player (onPlayerReady)="onPlayerReady($event)">
           <div class="custom-play-button" (tap)="currentMedia && currentMedia !== myMedia && 
             currentMedia.pause(); media.playing ? myMedia.pause() : myMedia.play();currentMedia = myMedia;media.playing = !media.playing;">
@@ -82,8 +82,6 @@
             src="{{media.media_file}}"></video>
         </vg-player>
 
-      </div>
-
       <!-- <div class="android-player" *ngIf="isAndroid">
           <div class="custom-play-button" (tap)="playAndroidVideo(media.id);">
               <button ion-button clear color="white" 
@@ -106,24 +104,25 @@
 
       <ion-row>
         <ion-col col-4>
-          <button ion-button icon-left small clear>
-            <ion-icon name="ios-videocam-outline"></ion-icon>
-            <span>{{media.views_count}}</span>
+          <button ion-button icon-start clear small>
+            <ion-icon name="videocam"></ion-icon>
+            <div>{{media.views_count}} 播放</div>
           </button>
         </ion-col>
-        <ion-col col-4 style="text-align: center;">
-          <button ion-button icon-left small clear>
-            <ion-icon name="ios-heart-outline"></ion-icon>
-            <span>{{media.likes_count}}</span>
+        <ion-col col-4 text-center>
+          <button ion-button icon-start clear small>
+            <ion-icon name="text"></ion-icon>
+            <div>{{media.comments_count}} 评论</div>
           </button>
         </ion-col>
-        <ion-col col-4 style="text-align: right;">
-          <button ion-button icon-left small clear>
-            <ion-icon name="ios-chatbubbles-outline"></ion-icon>
-            <span>{{media.comments_count}}</span>
+        <ion-col col-4 style="text-align:right;">
+          <button ion-button icon-start clear small>
+            <ion-icon name="thumbs-up"></ion-icon>
+            <div>{{media.likes_count}} 喜欢</div>
           </button>
         </ion-col>
       </ion-row>
+      
     </ion-card>
   </div>
 
