@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Media } from '../../provider/Media';
 import { Tools } from '../../provider/Tools';
+import { VgAPI } from 'videogular2/core';
 
 /**
  * Generated class for the MediaDetailPage page.
@@ -72,6 +73,15 @@ export class MediaDetailPage {
           this.tools.showToast(error.message || '服务器出错');
         });
     }
+  }
+
+  onPlayerReady(api: VgAPI) {
+
+    api.getDefaultMedia().subscriptions.play.subscribe(
+      () => {
+        this.mediaServ.PlayMedia(this.media.id).catch(error => console.log(error));
+      }
+    )
   }
 
 }

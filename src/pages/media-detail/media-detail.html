@@ -15,7 +15,7 @@
 
 <ion-content>
   <div class="media-player">
-    <vg-player>
+    <vg-player (onPlayerReady)="onPlayerReady($event)">
         <!-- <div class="custom-play-button" tappable (click)="currentMedia && currentMedia !== myMedia && 
           currentMedia.pause(); media.playing ? myMedia.pause() : myMedia.play();currentMedia = myMedia;media.playing = !media.playing;$event.stopPropagation();">
           <button ion-button clear color="white" 

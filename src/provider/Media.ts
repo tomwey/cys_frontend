@@ -52,4 +52,18 @@ export class Media {
             });
         });
     }
+
+    PlayMedia(mediaID) {
+        return new Promise((resolve, reject) => {
+            this.users.token().then(token => {
+                this.api.POST(`media/play`, { token: token, id: mediaID }, '', false)
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    })
+            });
+        });
+    }
 }

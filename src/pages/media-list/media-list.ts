@@ -112,6 +112,9 @@ export class MediaListPage {
   }
 
   selectMedia(media) {
+    this.currentMedia && this.currentMedia.pause();
+    this.currentMedia.srcMedia.playing = false;
+    
     this.app.getRootNavs()[0].push('MediaDetailPage', media);
   }
 
@@ -149,6 +152,14 @@ export class MediaListPage {
   }
 
   onPlayerReady(api: VgAPI) {
+    api.getDefaultMedia().subscriptions.play.subscribe(
+      () => {
+        // console.log('开始播放');
+        let srcMedia = this.currentMedia && this.currentMedia.srcMedia;
+        this.media.PlayMedia(srcMedia.id).catch(error => console.log(error));
+      }
+    )
+
     api.getDefaultMedia().subscriptions.ended.subscribe(
       () => {
           // Set the video to the beginning
