@@ -2,10 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Media } from '../../provider/Media';
 import { Tools } from '../../provider/Tools';
-import { VgAPI } from 'videogular2/core';
 
 /**
- * Generated class for the MediaDetailPage page.
+ * Generated class for the TopicDetailPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -13,12 +12,12 @@ import { VgAPI } from 'videogular2/core';
 
 @IonicPage()
 @Component({
-  selector: 'page-media-detail',
-  templateUrl: 'media-detail.html',
+  selector: 'page-topic-detail',
+  templateUrl: 'topic-detail.html',
 })
-export class MediaDetailPage {
+export class TopicDetailPage {
 
-  media: any = null;
+  topic: any = null;
 
   error: any = null;
   comments: any = [];
@@ -41,8 +40,7 @@ export class MediaDetailPage {
     private mediaServ: Media,
     private tools: Tools,
     public navParams: NavParams) {
-    this.media = this.navParams.data;
-    // console.log(this.media);
+      this.topic = this.navParams.data;
   }
 
   ionViewDidLoad() {
@@ -55,7 +53,8 @@ export class MediaDetailPage {
   loadComments() {
     
     return new Promise((resolve) => {
-      this.mediaServ.GetComments('Media', this.media.id, this.pageNum, this.pageSize)
+      this.mediaServ.GetComments('Topic', this.topic.id, 
+      this.pageNum, this.pageSize)
       .then(res => {
           const data = res['data'];
           const total = res['total'];
@@ -107,12 +106,12 @@ export class MediaDetailPage {
       this.doReply();
       return;
     }
-    this.mediaServ.CreateComment('Media', this.media.id, this.content)
+    this.mediaServ.CreateComment('Topic', this.topic.id, this.content)
       .then(res => {
         let comment = res['data'];
         
         if (comment) {
-          this.media.comments_count += 1;
+          this.topic.comments_count += 1;
           this.comments.unshift(comment);
         }
 
@@ -155,18 +154,18 @@ export class MediaDetailPage {
     this.to_user = to_user;
   }
 
-  like(ev, media) {
-    if (media.liked) {
+  like(ev, topic_) {
+    if (topic_.liked) {
       // 取消喜欢
-      this.mediaServ.DeleteLike(media.id)
+      this.mediaServ.DeleteLike(topic_.id, 'Topic')
         .then(res => {
-          media.liked = false;
-          let likesCount = media.likes_count;
+          topic_.liked = false;
+          let likesCount = topic_.likes_count;
           likesCount -= 1;
           if (likesCount < 0) {
             likesCount = 0;
           }
-          media.likes_count = likesCount;
+          topic_.likes_count = likesCount;
         })
         .catch(error => {
           this.tools.showToast(error.message || '服务器出错');
@@ -174,24 +173,15 @@ export class MediaDetailPage {
         });
     } else {
       // 添加喜欢
-      this.mediaServ.CreateLike(media.id)
+      this.mediaServ.CreateLike(topic_.id, 'Topic')
         .then(res => {
-          media.liked = true;
-          media.likes_count += 1;
+          topic_.liked = true;
+          topic_.likes_count += 1;
         })
         .catch(error => {
           this.tools.showToast(error.message || '服务器出错');
         });
     }
-  }
-
-  onPlayerReady(api: VgAPI) {
-
-    api.getDefaultMedia().subscriptions.play.subscribe(
-      () => {
-        this.mediaServ.PlayMedia(this.media.id).catch(error => console.log(error));
-      }
-    )
   }
 
 }

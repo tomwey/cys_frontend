@@ -25,10 +25,13 @@ export class Media {
         });
     }
 
-    CreateLike(mediaID) {
+    CreateLike(mediaID, type: any = 'Media') {
         return new Promise((resolve, reject) => {
             this.users.token().then(token => {
-                this.api.POST(`likes/create`, { token: token, like_id: mediaID })
+                this.api.POST(`likes/create`, { token: token, 
+                        like_id: mediaID,
+                        like_type: type
+                     })
                     .then(data => {
                         resolve(data);
                     })
@@ -39,10 +42,10 @@ export class Media {
         });
     }
 
-    DeleteLike(mediaID) {
+    DeleteLike(mediaID, type: any = 'Media') {
         return new Promise((resolve, reject) => {
             this.users.token().then(token => {
-                this.api.POST(`likes/delete`, { token: token, like_id: mediaID })
+                this.api.POST(`likes/delete`, { token: token, like_id: mediaID, like_type: type })
                     .then(data => {
                         resolve(data);
                     })
@@ -133,6 +136,26 @@ export class Media {
                     token: token, 
                     page: pageNum,
                     size: pageSize
+                 })
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    })
+            });
+        });
+    }
+
+    CreateTopic(content, file_type: any = null, files: any = null, address: any = null) {
+        return new Promise((resolve, reject) => {
+            this.users.token().then(token => {
+                this.api.POST(`topics/create`, { 
+                    token: token, 
+                    content: content,
+                    file_type: file_type,
+                    files: files,
+                    address: address,
                  })
                     .then(data => {
                         resolve(data);

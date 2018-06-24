@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { /*IonicPage, */NavController, NavParams, ModalController } from 'ionic-angular';
+import { /*IonicPage, */NavController, NavParams, ModalController, App } from 'ionic-angular';
 import { Media } from '../../provider/Media';
 import { Tools } from '../../provider/Tools';
 
@@ -33,6 +33,7 @@ export class TopicListPage {
   constructor(public navCtrl: NavController, 
     private media: Media,
     private tools: Tools,
+    private app: App,
     private modalCtrl: ModalController,
     public navParams: NavParams) {
   }
@@ -55,6 +56,14 @@ export class TopicListPage {
     this.hasMore = false;
 
     this.loadData();
+  }
+
+  openTopic(topic) {
+    if (topic.type == 0) {
+      this.app.getRootNavs()[0].push('MediaDetailPage', topic.media);
+    } else {
+      this.app.getRootNavs()[0].push('TopicDetailPage', topic);
+    }
   }
 
   loadData() {
@@ -86,7 +95,7 @@ export class TopicListPage {
         })
         .catch(error => {
           if (this.pageNum == 1) {
-            this.error = error;
+            this.error = error.message;
           } else {
             this.error = null;
             this.tools.showToast(error.message || error);
@@ -94,6 +103,39 @@ export class TopicListPage {
           resolve(false);
         });
     });
+  }
+
+  like(ev:Event, topic) {
+    // console.log(ev);
+    ev.stopPropagation();
+    // console.log(media);
+    if (topic.liked) {
+      // 取消喜欢
+      this.media.DeleteLike(topic.id, 'Topic')
+        .then(res => {
+          topic.liked = false;
+          let likesCount = topic.likes_count;
+          likesCount -= 1;
+          if (likesCount < 0) {
+            likesCount = 0;
+          }
+          topic.likes_count = likesCount;
+        })
+        .catch(error => {
+          this.tools.showToast(error.message || '服务器出错');
+          
+        });
+    } else {
+      // 添加喜欢
+      this.media.CreateLike(topic.id, 'Topic')
+        .then(res => {
+          topic.liked = true;
+          topic.likes_count += 1;
+        })
+        .catch(error => {
+          this.tools.showToast(error.message || '服务器出错');
+        });
+    }
   }
 
   newTopic() {

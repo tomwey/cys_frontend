@@ -30,7 +30,16 @@ export class NewTopicPage {
   }
 
   send() {
+    this.media.CreateTopic(this.content)
+      .then(res => {
+        this.content = '';
+        this.tools.showToast('发布成功！');
+        this.viewCtrl.dismiss(1).catch();
+      })
+      .catch(error => {
+        this.tools.showToast(error.message || '发布失败');
 
+      });
   }
 
   close() {

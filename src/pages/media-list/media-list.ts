@@ -91,7 +91,7 @@ export class MediaListPage {
         })
         .catch(error => {
           if (this.pageNum == 1) {
-            this.error = error;
+            this.error = error.message;
           } else {
             this.error = null;
             this.tools.showToast(error.message || error);

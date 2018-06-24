@@ -33,7 +33,7 @@
     {{error}}
   </div>
   <ion-list>
-    <ion-item *ngFor="let topic of topics">
+    <ion-item tappable (click)="openTopic(topic);" *ngFor="let topic of topics">
       <ion-row>
         <ion-col col-2>
           <ion-avatar>
@@ -46,7 +46,25 @@
             <p class="time">{{topic.time}}</p>
             <p class="body">{{topic.content}}</p>
             <div class="assets" *ngIf="topic.type"></div>
-            <div class="stats"></div>
+            <div class="stats">
+              <ion-row>
+                <ion-col col-8>
+                  <img src="{{user.avatar || 'assets/imgs/default_avatar.png'}}"
+                    *ngFor="let user of topic.liked_users" class="liked-user">
+                  <span class="liked-tip" [hidden]="topic.likes_count.length == 0">{{topic.likes_count}}人都说赞!</span>
+                </ion-col>
+                <ion-col col-4 style="text-align:right;">
+                    <button ion-button icon-start clear small (click)="like($event,topic);">
+                      <ion-icon name="md-heart" [class.liked]="topic.liked"></ion-icon>
+                      <div>{{topic.likes_count == 0 ? '' : topic.likes_count}}</div>
+                    </button>
+                    <button ion-button icon-start clear small>
+                      <ion-icon name="text"></ion-icon>
+                      <div>{{topic.comments_count == 0 ? '' : topic.comments_count}}</div>
+                    </button>
+                </ion-col>
+              </ion-row>
+            </div>
             <div class="comments"></div>
           </div>
         </ion-col>

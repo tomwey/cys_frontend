@@ -12,4 +12,28 @@ page-topic-list {
             font-weight: bold;
         }
     }
+
+    .stats {
+        ion-row, ion-col {
+            margin: 0;
+            padding: 0;
+        }
+        .liked {
+            color: color($colors, primary);
+        }
+        button {
+            color: #666;
+        }
+
+        .liked-user {
+            width: 20px;
+            height: 20px;
+            // margin-top: 5px;
+            border-radius: 50%;
+        }
+        .liked-tip {
+            font-size: 12px;
+            color: #999;
+        }
+    }
 }
