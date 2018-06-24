@@ -6,13 +6,58 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>TopicList</ion-title>
+  <ion-navbar color="white">
+    <div start class="bar-items">
+      <span class="custom-btn" 
+        [class.active]="dataType === 'latest'" tappable 
+        (click)="selectItem('latest');">最新</span>
+      <span class="custom-btn" tappable
+        [class.active]="dataType === 'suggest'"
+        (click)="selectItem('suggest');">推荐</span>
+      <span class="custom-btn" tappable
+        [class.active]="dataType === 'following'"
+        (click)="selectItem('following');">关注</span>
+    </div>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="newTopic();">
+        <ion-icon name="ios-add-outline"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
+<ion-content>
 
-<ion-content padding>
+  <div class="empty-error-box" *ngIf="!!error">
+    {{error}}
+  </div>
+  <ion-list>
+    <ion-item *ngFor="let topic of topics">
+      <ion-row>
+        <ion-col col-2>
+          <ion-avatar>
+            <img src="{{topic.owner?.avatar || 'assets/imgs/default_avatar.png'}}">
+          </ion-avatar>
+        </ion-col>
+        <ion-col col-10>
+          <div class="topic-body">
+            <h2>{{topic.owner?.name}}</h2>
+            <p class="time">{{topic.time}}</p>
+            <p class="body">{{topic.content}}</p>
+            <div class="assets" *ngIf="topic.type"></div>
+            <div class="stats"></div>
+            <div class="comments"></div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)" [enabled]="hasMore">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="正在加载...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
 </ion-content>

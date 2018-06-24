@@ -1,3 +1,15 @@
 page-topic-list {
+    .bar-items {
+        padding-left: 10px;
+    }
 
+    .custom-btn {
+        font-size: 14px;
+        color: #666;
+        padding: 5px;
+        &.active {
+            font-size: 16px;
+            font-weight: bold;
+        }
+    }
 }

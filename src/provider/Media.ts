@@ -125,4 +125,22 @@ export class Media {
             });
         });
     }
+
+    GetTopic(action, pageNum, pageSize: number = 20) {
+        return new Promise((resolve, reject) => {
+            this.users.token().then(token => {
+                this.api.GET(`topics/${action}`, { 
+                    token: token, 
+                    page: pageNum,
+                    size: pageSize
+                 })
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    })
+            });
+        });
+    }
 }
