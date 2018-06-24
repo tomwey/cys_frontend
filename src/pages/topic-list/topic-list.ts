@@ -120,6 +120,7 @@ export class TopicListPage {
             likesCount = 0;
           }
           topic.likes_count = likesCount;
+          // topic.liked_users.splice(0,1);
         })
         .catch(error => {
           this.tools.showToast(error.message || '服务器出错');
@@ -131,6 +132,7 @@ export class TopicListPage {
         .then(res => {
           topic.liked = true;
           topic.likes_count += 1;
+          topic.liked_users.unshift(res['data']['user']);
         })
         .catch(error => {
           this.tools.showToast(error.message || '服务器出错');
