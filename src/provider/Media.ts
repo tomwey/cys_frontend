@@ -147,16 +147,19 @@ export class Media {
         });
     }
 
-    CreateTopic(content, file_type: any = null, files: any = null, address: any = null) {
+    CreateTopic(content, file_type: any = null, files: any = [], address: any = null) {
         return new Promise((resolve, reject) => {
             this.users.token().then(token => {
-                this.api.POST(`topics/create`, { 
-                    token: token, 
-                    content: content,
-                    file_type: file_type,
-                    files: files,
-                    address: address,
-                 })
+
+                let formData = new FormData();
+                formData.append('token', token);
+                formData.append('content', content);
+                formData.append('file_type', file_type);
+                files.forEach(file => {
+                    formData.append('files[][file]', file);
+                });
+
+                this.api.POST2(`topics/create`, formData)
                     .then(data => {
                         resolve(data);
                     })

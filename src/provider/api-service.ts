@@ -151,7 +151,7 @@ export class ApiService {
   }
 
   // FormData提交
-  post2(uri, body: FormData) {
+  POST2(uri, body: FormData) {
     let url = API_HOST + '/' + uri;
 
       // 组装参数

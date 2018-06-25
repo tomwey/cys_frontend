@@ -24,28 +24,53 @@
 
 <ion-content>
   <ion-list>
-      <ion-item>
-        <ion-textarea placeholder="说点什么" [(ngModel)]="content" rows="6"></ion-textarea>
-      </ion-item>
+    <ion-item>
+      <ion-textarea placeholder="说点什么" [(ngModel)]="content" rows="6"></ion-textarea>
+    </ion-item>
   </ion-list>
-  <div class="assets">
+  <input type="file" multiple (change)="selectedFiles($event)" 
+      style="display: none" #fileInput>
+
+  <div class="assets" *ngIf="assets.length === 0">
+    
+    <!-- <button ion-button>照片/视频/音频</button> -->
     <ion-row>
       <ion-col col-4>
-        <div class="asset-button">
+        <div class="asset-button" tappable (click)="uploadFile(0);">
           <ion-icon name="ios-image-outline"></ion-icon>
           <p>图片</p>
         </div>
       </ion-col>
       <ion-col col-4>
-        <div class="asset-button">
+        <div class="asset-button" tappable (click)="uploadFile(1);">
           <ion-icon name="ios-mic-outline"></ion-icon>
           <p>录音</p>
+          
         </div>
       </ion-col>
       <ion-col col-4>
-        <div class="asset-button">
+        <div class="asset-button" tappable (click)="uploadFile(2);">
           <ion-icon name="ios-videocam-outline"></ion-icon>
           <p>视频</p>
+          
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div class="asset-results" *ngIf="assets.length > 0">
+    <ion-row>
+      <ion-col col-4 *ngFor="let asset of assets;let i = index;">
+        <div class="asset">
+          <button ion-button *ngIf="assetType !== 0 || i !== assets.length - 1"
+            (click)="remove(asset);" icon-only clear class="close-btn">
+            <ion-icon name="ios-close-circle"></ion-icon>
+          </button>
+          <img [src]="asset.fileURL" *ngIf="assetType ==0 && i !== assets.length - 1">
+          <span *ngIf="assetType ==0 && i == assets.length - 1" style="font-size: 28px;" 
+            class="add-btn" 
+            tappable
+            (click)="uploadFile(0);">+</span>
         </div>
       </ion-col>
     </ion-row>
