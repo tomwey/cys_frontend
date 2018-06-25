@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, TextInput } from 'ionic-angular';
 import { Media } from '../../provider/Media';
 import { Tools } from '../../provider/Tools';
 import { VgAPI } from 'videogular2/core';
@@ -37,6 +37,7 @@ export class MediaDetailPage {
   replyComment: any = null;
   to_user: any = null;
 
+  @ViewChild('myInput') input: TextInput;
   constructor(public navCtrl: NavController, 
     private mediaServ: Media,
     private tools: Tools,
@@ -153,6 +154,11 @@ export class MediaDetailPage {
     this.sendType = 1;
     this.replyComment = comment;
     this.to_user = to_user;
+    this.input.setFocus();
+    // if (to_user) {
+    //   this.input.setValue('回复@' + to_user.nickname + ': ');
+    // }
+    
   }
 
   like(ev, media) {

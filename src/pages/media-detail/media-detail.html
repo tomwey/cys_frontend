@@ -127,7 +127,7 @@
 
 <ion-footer>
   <ion-toolbar color="white">
-    <div class="input-box"><ion-input [(ngModel)]="content" placeholder="说点什么"></ion-input></div>
+    <div class="input-box"><ion-input #myInput [(ngModel)]="content" placeholder="说点什么"></ion-input></div>
       <ion-buttons end>
         <button ion-button color="primary" [disabled]="!content" (click)="send();">
           发送
