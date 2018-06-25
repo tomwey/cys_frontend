@@ -63,11 +63,11 @@
       <ion-note item-right style="text-align:right;">
         <button ion-button icon-start clear small>
           <ion-icon name="videocam"></ion-icon>
-          <div>{{media.views_count}}</div>
+          <div>{{media.views_count | num2str}}</div>
         </button>
         <button ion-button icon-start clear small (click)="like($event,media);">
           <ion-icon name="md-heart" [class.liked]="media.liked"></ion-icon>
-          <div>{{media.likes_count}}</div>
+          <div>{{media.likes_count | num2str}}</div>
         </button>  
       </ion-note>
     </ion-item>
@@ -78,13 +78,13 @@
       <h2>{{media.owner?.name}}</h2>
       <p>{{media.owner?.school}}</p>
       <ion-note item-right style="font-size: 12px;">
-        {{media.time || '06月30日 20:00'}}
+        {{media.time | moment:'MM月DD日 HH:mm'}}
       </ion-note>
     </ion-item>
     </ion-list>
   </div>
   <div class="comments">
-    <h2 class="title">评论 {{media.comments_count}}</h2>
+    <h2 class="title">评论 {{media.comments_count | num2str}}</h2>
     <div class="empty-error-box" *ngIf="!!error">
       {{error}}
     </div>
@@ -100,8 +100,8 @@
               <div class="body">
                 <div tappable (click)="reply(comment);">
                   <h2>{{comment.user.nickname}}</h2>
-                  <p>{{comment.content}}</p>
-                  <p>{{comment.time}}</p>
+                  <p class="text">{{comment.content}}</p>
+                  <p class="time">{{comment.time | timeAgo:'YYYY-MM-DD HH:mm:ss'}}</p>
                 </div>
                 <div class="replies" *ngIf="comment.replies.length > 0">
                   <p class="reply" tappable (click)="reply(comment, rep.from_user.id);" *ngFor="let rep of comment.replies" text-wrap>

@@ -34,7 +34,7 @@
         <h2>{{media.owner && media.owner.name}}</h2>
         <p>{{media.owner && media.owner.school}}</p>
         <ion-note item-right>
-          {{media.time}}
+          {{media.time | moment: 'MM月DD日 HH:mm'}}
         </ion-note>
       </ion-item>
 
@@ -106,19 +106,19 @@
         <ion-col col-4>
           <button ion-button icon-start clear small>
             <ion-icon name="videocam"></ion-icon>
-            <div>{{media.views_count}} 播放</div>
+            <div>{{media.views_count | num2str}} 播放</div>
           </button>
         </ion-col>
         <ion-col col-4 text-center>
           <button ion-button icon-start clear small>
             <ion-icon name="text"></ion-icon>
-            <div>{{media.comments_count}} 评论</div>
+            <div>{{media.comments_count  | num2str}} 评论</div>
           </button>
         </ion-col>
         <ion-col col-4 style="text-align:right;">
           <button ion-button icon-start clear small (click)="like($event,media);">
             <ion-icon name="md-heart" [class.liked]="media.liked"></ion-icon>
-            <div>{{media.likes_count}} 喜欢</div>
+            <div>{{media.likes_count  | num2str}} 喜欢</div>
           </button>
         </ion-col>
       </ion-row>

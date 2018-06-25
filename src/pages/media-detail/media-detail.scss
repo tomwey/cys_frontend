@@ -72,6 +72,18 @@ page-media-detail {
             border-bottom: 0.55px solid #e6e6e6;
         }
 
+        .body {
+            .text {
+                color: #666;
+                font-size: 14px;
+            }
+            .time {
+                color: #999;
+                margin-top: 5px;
+                font-size: 12px;
+            }
+        }
+
         .empty-error-box {
             margin-top: 20px;
             border: 0;
