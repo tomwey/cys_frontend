@@ -151,7 +151,11 @@ export class ApiService {
   }
 
   // FormData提交
-  POST2(uri, body: FormData) {
+  POST2(uri, body: FormData, loadingText = '正在提交', showLoading = true) {
+    if (showLoading) {
+      this.showLoading(loadingText);
+    }
+
     let url = API_HOST + '/' + uri;
 
       // 组装参数

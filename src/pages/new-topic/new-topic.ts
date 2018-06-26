@@ -24,6 +24,8 @@ export class NewTopicPage {
   assets: any = [];
   assetType: number = 0; // 0 表示图片 1 表示录音 2 表示视频
 
+  originalFiles: any = [];
+
   constructor(public navCtrl: NavController, 
     private media: Media,
     private tools: Tools,
@@ -39,13 +41,18 @@ export class NewTopicPage {
   }
 
   send() {
+
     let arr = [];
-    for (var i=0; i<this.assets.length; i++) {
-      if (i !== this.assets.length - 1) {
-        arr.push(this.assets[i]);
+    if (this.assetType == 0) {
+      for (var i=0; i<this.assets.length; i++) {
+        if (i !== this.assets.length - 1) {
+          arr.push(this.assets[i]);
+        }
       }
+      // console.log(arr);
+    } else {
+      arr = this.originalFiles;
     }
-    console.log(arr);
 
     this.media.CreateTopic(this.content, this.assetType + 1, arr)
       .then(res => {
@@ -81,14 +88,13 @@ export class NewTopicPage {
 
   uploadFile(type) {
     this.assetType = type;
-
+    // console.log('1234');
     if (type != 0) {
       this.assets = [];
+      this.originalFiles = [];
     }
 
     let clickEvent: MouseEvent = new MouseEvent('click', { bubbles: true });
-    // console.log(this.renderer);
-
     this.renderer.invokeElementMethod(
       this.fileInput.nativeElement, "dispatchEvent", [clickEvent]
     );
@@ -97,6 +103,8 @@ export class NewTopicPage {
   remove(asset) {
     const index = this.assets.indexOf(asset);
     this.assets.splice(index, 1);
+    // 重置文件选择输入框
+    this.fileInput.nativeElement.value = null;
   }
 
   readFile(file): Promise<any> {
@@ -114,7 +122,7 @@ export class NewTopicPage {
   selectedFiles(ev) {
     let files: FileList = this.fileInput.nativeElement.files;
     console.log(files);
-    // console.log(ev);
+
     if (files.length == 0) return;
 
     if (this.assetType > 0) {
@@ -127,6 +135,18 @@ export class NewTopicPage {
         alert.present();
         return;
       }
+
+      let file = files[0];
+      let fileSize = file.size;
+      if (fileSize > 10 * 1024 * 1024) { // 最多支持6MB
+        let alert = this.alertCtrl.create({
+          title: '文件太大',
+          subTitle: '视频或音频文件不能超过10MB',
+          buttons: ['确定']
+        });
+        alert.present();
+        return;
+      }
     } 
 
     let fileArr: any = [];
@@ -134,6 +154,8 @@ export class NewTopicPage {
     for (var i=0; i<files.length; i++) {
       // fileArr.push(files[i]);
       let file = files[i];
+
+      this.originalFiles.push(file);
 
       promises.push(
         this.readFile(file)

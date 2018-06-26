@@ -14,7 +14,7 @@
     </ion-buttons>
     <ion-title>发布动态</ion-title>
     <ion-buttons end>
-      <button ion-button (click)="send();">
+      <button ion-button (click)="send();" [disabled]="!content">
         发表
       </button>
     </ion-buttons>
@@ -62,18 +62,26 @@
     <ion-row>
       <ion-col col-4 *ngFor="let asset of assets;let i = index;">
         <div class="asset">
-          <button ion-button *ngIf="assetType !== 0 || i !== assets.length - 1"
-            (click)="remove(asset);" icon-only clear class="close-btn">
-            <ion-icon name="ios-close-circle"></ion-icon>
-          </button>
-          <img [src]="asset.fileURL" *ngIf="assetType ==0 && i !== assets.length - 1">
-          <span *ngIf="assetType ==0 && i == assets.length - 1" style="font-size: 28px;" 
-            class="add-btn" 
-            tappable
-            (click)="uploadFile(0);">+</span>
+          <div *ngIf="assetType == 0">
+            <button ion-button *ngIf="i !== assets.length - 1"
+              (click)="remove(asset);" icon-only clear class="close-btn">
+              <ion-icon name="ios-close-circle"></ion-icon>
+            </button>
+            <img [src]="asset.fileURL" *ngIf="i !== assets.length - 1">
+            <span *ngIf="i == assets.length - 1" style="font-size: 28px;" 
+              class="add-btn" tappable
+              (click)="uploadFile(0);">+</span>
+          </div>
         </div>
       </ion-col>
     </ion-row>
+    <div class="video-preview" *ngIf="assetType == 2">
+      <video [src]="assets[0].fileURL" controls></video>
+      <button ion-button
+        (click)="remove(assets[0]);" icon-only clear class="close-btn">
+        <ion-icon name="ios-close-circle"></ion-icon>
+      </button>
+    </div>
   </div>
 
 </ion-content>
