@@ -43,9 +43,15 @@
         <ion-col col-10>
           <div class="topic-body">
             <h2>{{topic.owner?.name}}</h2>
-            <p class="time">{{topic.time}}</p>
+            <p class="time">{{topic.time | timeAgo:'YYYY-MM-DD HH:mm:ss'}}</p>
             <p class="body">{{topic.content}}</p>
-            <div class="assets" *ngIf="topic.type"></div>
+            <div class="assets" *ngIf="topic.type">
+              <ion-row>
+                <ion-col col-4 *ngFor="let asset of topic.files">
+                  <img [src]="asset.url" class="asset-image">
+                </ion-col>
+              </ion-row>
+            </div>
             <div class="stats">
               <ion-row>
                 <ion-col col-8>

@@ -36,4 +36,24 @@ page-topic-list {
             color: #999;
         }
     }
+
+    .assets {
+        .asset-image {
+            width: 80px;
+            height: 80px;
+        }
+    }
+
+    .topic-body {
+        .time {
+            margin-top: 5px;
+            font-size: 12px;
+            font-size: #999;
+        }
+        .body {
+            color: #333;
+            font-size: 12px;
+        }
+    }
+
 }

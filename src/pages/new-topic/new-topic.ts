@@ -46,7 +46,7 @@ export class NewTopicPage {
       }
     }
     console.log(arr);
-    
+
     this.media.CreateTopic(this.content, this.assetType + 1, arr)
       .then(res => {
         this.content = '';
@@ -113,7 +113,7 @@ export class NewTopicPage {
 
   selectedFiles(ev) {
     let files: FileList = this.fileInput.nativeElement.files;
-    // console.log(files);
+    console.log(files);
     // console.log(ev);
     if (files.length == 0) return;
 

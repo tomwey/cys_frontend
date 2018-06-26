@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, TextInput } from 'ionic-angular';
 import { Media } from '../../provider/Media';
 import { Tools } from '../../provider/Tools';
 
@@ -36,6 +36,8 @@ export class TopicDetailPage {
   replyComment: any = null;
   to_user: any = null;
 
+  @ViewChild('input') input: TextInput;
+  
   constructor(public navCtrl: NavController, 
     private mediaServ: Media,
     private tools: Tools,
@@ -152,6 +154,7 @@ export class TopicDetailPage {
     this.sendType = 1;
     this.replyComment = comment;
     this.to_user = to_user;
+    this.input.setFocus();
   }
 
   like(ev, topic_) {

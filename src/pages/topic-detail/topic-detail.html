@@ -13,23 +13,30 @@
 </ion-header>
 
 <ion-content>
-  <div class="topic">
-    <div class="owner-info">
+  <div class="owner-info">
       <ion-item>
         <ion-avatar item-left>
           <img src="{{topic.owner?.avatar || 'assets/imgs/default_avatar.png'}}">
         </ion-avatar>
         <h2>{{topic.owner?.name}}</h2>
-        <p>{{topic.time}}</p>
+        <p>{{topic.time | timeAgo:'YYYY-MM-DD HH:mm:ss'}}</p>
         <ion-note item-right>
           <button ion-button small>关注</button>
         </ion-note>
       </ion-item>
     </div>
+  <div class="topic">
+    
     <div classs="body">
       {{topic.content}}
     </div>
-    <div class="assets" *ngIf="topic.type > 0"></div>
+    <div class="assets" *ngIf="topic.type > 0">
+        <ion-row>
+            <ion-col col-4 *ngFor="let asset of topic.files">
+              <img [src]="asset.url" class="asset-image">
+            </ion-col>
+          </ion-row>
+    </div>
     <div class="liked-area">
       <ion-row>
         <ion-col col-9>
@@ -44,6 +51,9 @@
         </ion-col>
       </ion-row>
     </div>
+    
+    </div>
+
     <div class="comments">
         <h2 class="title">评论 {{topic.comments_count}}</h2>
         <div class="empty-error-box" *ngIf="!!error">
@@ -58,11 +68,11 @@
                     </ion-avatar>
               </ion-col>
               <ion-col col-10>
-                  <div class="body">
+                  <div class="msg-area">
                     <div tappable (click)="reply(comment);">
                       <h2>{{comment.user.nickname}}</h2>
-                      <p>{{comment.content}}</p>
-                      <p>{{comment.time}}</p>
+                      <p class="text">{{comment.content}}</p>
+                      <p class="time">{{comment.time | timeAgo:'YYYY-MM-DD HH:mm:ss'}}</p>
                     </div>
                     <div class="replies" *ngIf="comment.replies.length > 0">
                       <p class="reply" tappable (click)="reply(comment, rep.from_user.id);" *ngFor="let rep of comment.replies" text-wrap>
@@ -76,7 +86,7 @@
           </ion-item>
         </ion-list>
       </div>
-    </div>
+
       <ion-infinite-scroll (ionInfinite)="loadMore($event)" [enabled]="hasMore">
           <ion-infinite-scroll-content
             loadingSpinner="bubbles"
@@ -87,7 +97,7 @@
 
 <ion-footer>
     <ion-toolbar color="white">
-      <div class="input-box"><ion-input [(ngModel)]="content" placeholder="说点什么"></ion-input></div>
+      <div class="input-box"><ion-input #input [(ngModel)]="content" placeholder="说点什么"></ion-input></div>
         <ion-buttons end>
           <button ion-button color="primary" [disabled]="!content" (click)="send();">
             发送
