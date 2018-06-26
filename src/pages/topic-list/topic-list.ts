@@ -34,12 +34,14 @@ export class TopicListPage {
   currentMedia: any = null;
   currentMedia2: any = null;
 
+  
   constructor(public navCtrl: NavController, 
     private media: Media,
     private tools: Tools,
     private app: App,
     private modalCtrl: ModalController,
     public navParams: NavParams) {
+
   }
 
   ionViewDidLoad() {
@@ -47,6 +49,18 @@ export class TopicListPage {
     setTimeout(() => {
       this.loadData();
     }, 20);
+  }
+
+  playOrPause(ev:Event, audio) {
+    ev.stopPropagation();
+    
+    // this.audioPlayer.src = audio.url;
+    // this.audioPlayer.play();
+
+    // this.audioPlayer.onprogress = (progress) => {
+    //   console.log(progress);
+    //     audio.progress = progress;
+    // };
   }
 
   selectItem(type) {
