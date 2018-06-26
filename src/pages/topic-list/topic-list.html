@@ -124,9 +124,11 @@
             <div class="stats">
               <ion-row>
                 <ion-col col-8>
-                  <img src="{{user.avatar || 'assets/imgs/default_avatar.png'}}"
-                    *ngFor="let user of topic.liked_users" class="liked-user">
-                  <span class="liked-tip" [hidden]="topic.likes_count.length == 0">{{topic.likes_count}}人都说赞!</span>
+                  <div class="liked-users" *ngIf="topic.likes_count !== 0">
+                      <img src="{{user.avatar || 'assets/imgs/default_avatar.png'}}"
+                      *ngFor="let user of topic.liked_users" class="liked-user">
+                      <span class="liked-tip">{{topic.likes_count}}人都说赞!</span>
+                  </div>
                 </ion-col>
                 <ion-col col-4 style="text-align:right;">
                     <button ion-button icon-start clear small (click)="like($event,topic);">
