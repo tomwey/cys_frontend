@@ -13,6 +13,12 @@ page-topic-list {
         }
     }
 
+    .custom-item {
+        [col-2] {
+            max-width: 50px;
+        }
+    }
+
     .stats {
         ion-row, ion-col {
             margin: 0;
