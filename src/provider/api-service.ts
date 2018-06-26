@@ -166,10 +166,29 @@ export class ApiService {
       body.append('ak', ak);
 
       // let headers = new Headers({'Content-Type': 'multipart/form-data'});
-      return this.http.post(url, body, null)
-      .toPromise()
-      .then(this.handleSuccess)
-      .catch(this.handleError);
+      return new Promise((resolve, reject) => {
+        this.http.post(url, body, null)
+        .toPromise()
+        .then(resp => {
+          this.hideLoading();
+          // console.log('success');
+          let result = this.handleSuccess(resp);
+          if (result.code == 0) {
+            resolve(result);
+            // resolve({ data: result.data, total: result.total });
+          } else {
+            reject(result);
+          }
+        })
+        .catch(error => {
+          this.hideLoading();
+
+          let err = this.handleError(error);
+          reject(err);
+        });
+      }); 
+      //.then(this.handleSuccess)
+      //.catch(this.handleError);
   }
 
   // 生成MD5
