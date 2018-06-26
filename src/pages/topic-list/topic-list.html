@@ -46,11 +46,80 @@
             <p class="time">{{topic.time | timeAgo:'YYYY-MM-DD HH:mm:ss'}}</p>
             <p class="body">{{topic.content}}</p>
             <div class="assets" *ngIf="topic.type">
-              <ion-row>
+              <ion-row *ngIf="topic.type == 1">
                 <ion-col col-4 *ngFor="let asset of topic.files">
                   <img [src]="asset.url" class="asset-image">
                 </ion-col>
               </ion-row>
+              <!-- 作品类型 -->
+              <div class="media-player" *ngIf="topic.type == 0 && topic.media">
+                  <vg-player (onPlayerReady)="onPlayerReady($event)">
+                      <div class="custom-play-button" tappable (click)="  
+                        currentMedia && currentMedia !== myMedia && currentMedia.pause(); 
+                        media.playing ? myMedia.pause() : myMedia.play(); 
+                        currentMedia = myMedia;
+                        currentMedia.srcMedia = topic.media; 
+                        topic.media.playing = !topic.media.playing;
+            
+                        $event.stopPropagation();">
+                        <button ion-button clear color="white" 
+                          class="play-button">
+                          <ion-icon name="play" *ngIf="currentMedia !== myMedia || !currentMedia.srcMedia?.playing"></ion-icon>
+                        </button>
+                      </div>
+            
+                      <vg-buffering></vg-buffering>
+            
+                      <vg-scrub-bar [vgSlider]="false" style="pointer-events: none;">
+                        <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                        <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+                      </vg-scrub-bar>
+                      
+                      <video #myMedia [vgMedia]="myMedia" 
+                        playsinline webkit-playsinline
+                        x-webkit-airplay="true" 
+                        x5-video-player-type="h5"
+                        x5-video-orientation="h5"
+            
+                        id="vid-{{topic.media.id}}"
+                        poster="{{topic.media.cover}}" 
+                        src="{{topic.media.media_file}}"></video>
+                    </vg-player>
+                  </div>
+                <!-- 音频 -->
+                <div class="audio" *ngIf="topic.type == 2">
+                  <audio [src]="audio.url" controls *ngFor="let audio of topic.files"></audio>
+                </div>
+                <!-- 视频 -->
+                <div class="video media-player" *ngIf="topic.type == 3">
+                  <vg-player *ngFor="let vid of topic.files">
+                      <div class="custom-play-button" tappable (click)="  
+                      currentMedia2 && currentMedia2 !== myMedia2 && currentMedia2.pause(); 
+                      currentMedia2 = myMedia2;
+                      currentMedia2.play();
+                      $event.stopPropagation();">
+                      <button ion-button clear color="white" 
+                        class="play-button">
+                        <ion-icon name="play" *ngIf="currentMedia2 !== myMedia2"></ion-icon>
+                      </button>
+                    </div>
+
+                    <vg-buffering></vg-buffering>
+          
+                    <vg-scrub-bar [vgSlider]="false" style="pointer-events: none;">
+                      <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                      <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+                    </vg-scrub-bar>
+                    
+                    <video #myMedia2 [vgMedia]="myMedia2" 
+                      playsinline webkit-playsinline
+                      x-webkit-airplay="true" 
+                      x5-video-player-type="h5"
+                      x5-video-orientation="h5"
+          
+                      src="{{vid.url}}"></video>
+                  </vg-player>
+                </div>
             </div>
             <div class="stats">
               <ion-row>
@@ -71,7 +140,11 @@
                 </ion-col>
               </ion-row>
             </div>
-            <div class="comments"></div>
+            <div class="comments" *ngIf="topic.comments_count > 0">
+              <p class="comment" *ngFor="let comment of topic.latest_comments">
+                <span class="user">{{comment.user?.nickname}}</span>: {{comment.content}}
+              </p>
+            </div>
           </div>
         </ion-col>
       </ion-row>

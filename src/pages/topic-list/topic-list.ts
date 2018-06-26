@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { /*IonicPage, */NavController, NavParams, ModalController, App } from 'ionic-angular';
 import { Media } from '../../provider/Media';
 import { Tools } from '../../provider/Tools';
+import { VgAPI } from 'videogular2/core';
 
 /**
  * Generated class for the TopicListPage page.
@@ -29,6 +30,9 @@ export class TopicListPage {
   hasMore: boolean = false;
 
   dataType: string = 'latest';
+
+  currentMedia: any = null;
+  currentMedia2: any = null;
 
   constructor(public navCtrl: NavController, 
     private media: Media,
@@ -158,6 +162,23 @@ export class TopicListPage {
         e.complete();
       });
     }
+  }
+
+  onPlayerReady(api: VgAPI) {
+    api.getDefaultMedia().subscriptions.play.subscribe(
+      () => {
+        // console.log('开始播放');
+        let srcMedia = this.currentMedia && this.currentMedia.srcMedia;
+        this.media.PlayMedia(srcMedia.id).catch(error => console.log(error));
+      }
+    )
+
+    api.getDefaultMedia().subscriptions.ended.subscribe(
+      () => {
+          // Set the video to the beginning
+          api.getDefaultMedia().currentTime = 0;
+      }
+    );
   }
 
 }
