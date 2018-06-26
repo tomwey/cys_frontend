@@ -33,7 +33,7 @@ import {VgControlsModule} from 'videogular2/controls';
 import {VgOverlayPlayModule} from 'videogular2/overlay-play';
 import {VgBufferingModule} from 'videogular2/buffering';
 import { PipesModule } from '../pipes/pipes.module';
-
+import { IonicImageViewerModule } from 'ionic-img-viewer';
 // import { APIs } from '../provider/APIs';
 // import { ApiService } from '../provider/api-service';
 
@@ -60,6 +60,7 @@ import { PipesModule } from '../pipes/pipes.module';
     VgOverlayPlayModule,
     VgBufferingModule,
     PipesModule,
+    IonicImageViewerModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [

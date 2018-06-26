@@ -48,7 +48,7 @@
             <div class="assets" *ngIf="topic.type">
               <ion-row *ngIf="topic.type == 1">
                 <ion-col col-4 *ngFor="let asset of topic.files">
-                  <img [src]="asset.url" class="asset-image">
+                  <img [src]="asset.url" class="asset-image" #myImage (click)="presentImage($event,myImage)">
                 </ion-col>
               </ion-row>
               <!-- 作品类型 -->

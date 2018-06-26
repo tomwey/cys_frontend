@@ -3,6 +3,7 @@ import { /*IonicPage, */NavController, NavParams, ModalController, App } from 'i
 import { Media } from '../../provider/Media';
 import { Tools } from '../../provider/Tools';
 import { VgAPI } from 'videogular2/core';
+import { ImageViewerController } from 'ionic-img-viewer';
 
 /**
  * Generated class for the TopicListPage page.
@@ -39,6 +40,7 @@ export class TopicListPage {
     private media: Media,
     private tools: Tools,
     private app: App,
+    private imageVC: ImageViewerController,
     private modalCtrl: ModalController,
     public navParams: NavParams) {
 
@@ -61,6 +63,12 @@ export class TopicListPage {
     //   console.log(progress);
     //     audio.progress = progress;
     // };
+  }
+
+  presentImage(ev: Event, myImage) {
+    ev.stopPropagation();
+    const imageViewer = this.imageVC.create(myImage);
+    imageViewer.present();
   }
 
   selectItem(type) {
