@@ -25,7 +25,7 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, 
     private api: ApiService,
-    // private app: App,
+    private app: App,
     private iosFixed: iOSFixedScrollFreeze,
     public navParams: NavParams) {
   }
@@ -68,6 +68,10 @@ export class HomePage {
     if (this.slides) {
       this.slides.stopAutoplay();  
     }
+  }
+
+  vote() {
+    this.app.getRootNavs()[0].push('VoteDetailPage', this.entryData.vote);
   }
 
   autoPlay() {

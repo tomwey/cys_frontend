@@ -35,7 +35,7 @@
     <!-- 投票区 -->
     <div class="box">
       <h2>正在投票
-        <span class="more">点击进入 <ion-icon name="ios-arrow-forward-outline"></ion-icon>
+        <span class="more" tappable (click)="vote();">进入投票 <ion-icon name="ios-arrow-forward-outline"></ion-icon>
         </span>
       </h2>
       <div class="votes" *ngIf="entryData.vote">

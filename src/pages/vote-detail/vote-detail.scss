@@ -1,0 +1,92 @@
+page-vote-detail {
+    h2, p {
+        margin: 0;
+        padding: 0;
+    }
+    .vote {
+        padding: 15px;
+        .base-info {
+            .title {
+                font-size: 18px;
+                color: #333;
+                font-weight: normal;
+            }
+            .time {
+                font-size: 14px;
+                color: #999;
+                margin-top: 10px;
+            }
+        }
+    }
+
+    // 以下为自定义loading spinner样式
+    vg-scrub-bar {
+        position: absolute;
+        bottom: 0;
+        height: 1px;
+        vg-scrub-bar-current-time,vg-scrub-bar-buffering-time {
+            height: 1px;
+        }
+    }
+
+    .vg-buffering .bufferingContainer {
+        margin-top: -25px;
+    }
+
+    .vg-buffering .loadingSpinner {
+        border: 2px solid rgba(255, 255, 255, 1);
+        border-top: 2px solid rgba(0, 0, 0, 0);
+        border-left: 2px solid rgba(0, 0, 0, 0);
+    }
+
+    .media-player {
+        .custom-play-button {
+            position: absolute;
+            z-index: 200;
+            width: 100%;
+            height: 100%;
+            // line-height: 50%;
+            text-align: center;
+            // padding-top: 20px;
+            .play-button {
+                font-size: 42px;
+                margin-top: 42px;
+            }
+        }
+    }
+
+    .vote-items {
+        h2 {
+            text-align: center;
+            font-size: 16px;
+            color: #333;
+            font-weight: normal;
+            margin: 30px 0;
+        }
+
+        ion-card {
+            box-shadow: none;
+            background: rgb(249,249,249);
+            border: 0.55px solid #ccc;
+            width: 100%;
+            margin: 0;
+        }
+
+        ion-card-header {
+            font-weight: normal;
+        }
+
+        .vote-btn {
+            text-align: center;
+            font-size: 16px;
+            color: #333;
+            // font-weight: normal;
+        }
+
+        .vote-warn {
+            margin: 20px 0;
+            font-size: 14px;
+            color: #999;
+        }
+    }
+}
