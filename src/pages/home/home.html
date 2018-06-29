@@ -63,19 +63,19 @@
       <ion-grid>
         <ion-row>
           <ion-col col-4>
-            <div class="feature">
+            <div class="feature" tappable (click)="openPerformers()">
               <img src="assets/imgs/icon_music_person.png">
               <h4>艺人库</h4>
             </div>
           </ion-col>
           <ion-col col-4>
-            <div class="feature">
+            <div class="feature" tappable (click)="openVotes()">
                 <img src="assets/imgs/icon_vote.png">
                 <h4>投票</h4>
             </div>
           </ion-col>
           <ion-col col-4>
-            <div class="feature">
+            <div class="feature" tappable (click)="openMXJJ()">
               <img src="assets/imgs/icon_mxjj.png">
               <h4>梦想基金</h4>
             </div>
@@ -141,7 +141,7 @@
     <!-- 男神女神 -->
     <div class="box">
       <h2>男神女神
-          <span class="more">更多 <ion-icon name="ios-arrow-forward-outline"></ion-icon>
+          <span class="more" tappable (click)="openPerformers();">更多 <ion-icon name="ios-arrow-forward-outline"></ion-icon>
           </span>
       </h2>
       <div class="performers">

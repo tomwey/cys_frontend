@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { /*IonicPage, */NavController, NavParams, Slides, App, Content, Events } from 'ionic-angular';
+import { /*IonicPage, */NavController, NavParams, Slides, App, Content, AlertController } from 'ionic-angular';
 import { ApiService } from '../../provider/api-service';
 import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 import { Users } from '../../provider/Users';
@@ -29,6 +29,7 @@ export class HomePage {
     private api: ApiService,
     private app: App,
     private users: Users,
+    private alertCtrl: AlertController,
     private iosFixed: iOSFixedScrollFreeze,
     public navParams: NavParams) {
   }
@@ -66,6 +67,26 @@ export class HomePage {
 
   openMoreMV() {
     this.app.getRootNavs()[0].push(MediaListPage);
+  }
+
+  openMXJJ() {
+    this.alertCtrl.create({
+      title: '筹备中',
+      subTitle: '即将上线...',
+      buttons: [
+        {
+          text: '确定'
+        }
+      ]
+    }).present();
+  }
+
+  openVotes() {
+    this.app.getRootNavs()[0].push('VoteListPage');
+  }
+
+  openPerformers() {
+    this.app.getRootNavs()[0].push('PerformerListPage');
   }
 
   ionViewDidEnter() {

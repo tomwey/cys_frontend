@@ -197,4 +197,18 @@ export class Media {
             });
         });
     }
+
+    GetVotes(pageNum, pageSize) {
+        return new Promise((resolve, reject) => {
+            this.users.token().then(token => {
+                this.api.GET(`votes`, {token: token, page: pageNum, size: pageSize})
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    })
+            });
+        });
+    }
 }
