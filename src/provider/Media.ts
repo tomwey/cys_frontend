@@ -211,4 +211,18 @@ export class Media {
             });
         });
     }
+
+    GetPerformers(pageNum, pageSize) {
+        return new Promise((resolve, reject) => {
+            this.users.token().then(token => {
+                this.api.GET(`performs`, {token: token, page: pageNum, size: pageSize})
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    })
+            });
+        });
+    }
 }

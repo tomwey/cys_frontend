@@ -6,13 +6,37 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>PerformerList</ion-title>
+  <ion-navbar color="white">
+    <ion-title>艺人库</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content style="background: white;">
+  <div class="empty-error-box" *ngIf="!!error">
+    {{error.message || error}}
+  </div>
+  <div class="performers">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6 *ngFor="let perform of data">
+          <div class="performer">
+            <!-- <ion-avatar> -->
+              <img [src]="perform.avatar" />
+            <!-- </ion-avatar> -->
+            <h4>{{perform.name}}</h4>
+            <p>{{perform.school}}</p>
+            <button ion-button small>关注</button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)" [enabled]="hasMore">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="正在加载...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
