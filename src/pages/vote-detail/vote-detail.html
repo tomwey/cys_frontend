@@ -55,14 +55,34 @@
         <ion-card-header>
           这期的最高分给谁？({{vote.type == 1 ? '单选' : '多选'}})
         </ion-card-header>
-        <ion-list>
-            <ion-item *ngFor="let item of vote.vote_items; let i = index;">
-              <ion-icon name="ios-radio-button-off-outline"></ion-icon>
-              0{{i+1}} {{item.perform.school}} {{item.perform.name}}
-            </ion-item>
+        <ion-list *ngIf="!vote.voted">
+          <ion-item *ngFor="let item of vote.vote_items; let i = index;" tappable (click)="selectItem(item);">
+            <ion-icon name="{{item.selected ? 'ios-radio-button-on-outline' : 'ios-radio-button-off-outline'}}" [class.selected]="item.selected"></ion-icon>
+            0{{i+1}} {{item.perform.school}} {{item.perform.name}}
+          </ion-item>
         </ion-list>
+        <div *ngIf="vote.voted" class="vote-result">
+          <table>
+            <tr *ngFor="let item of vote.vote_items; let i = index;">
+              <td class="base">
+                <h4>0{{i+1}} {{item.perform.school}} {{item.perform.name}}</h4>
+                <div class="progressbar">
+                  <div class="progressbar-inner" [style.width]="item.percent + '%'"></div>
+                </div>
+              </td>
+              <td class="tickets">
+                  {{item.vote_count}}<span class="unit">票</span>
+              </td>
+              <td class="percent">
+                  {{item.percent}}<span class="unit">%</span>
+              </td>
+            </tr>
+          </table>
+        </div>
         <ion-card-header>
-          <p class="vote-btn">投票</p>
+          <p class="vote-btn" tappable (click)="commit();">{{vote.voted ? '你已投票' : 
+            vote.expired ? '投票已过期' : '投票'  
+          }}</p>
         </ion-card-header>
       </ion-card>
       <p class="vote-warn">注：投票截止时间为{{vote.expire_time}}</p>

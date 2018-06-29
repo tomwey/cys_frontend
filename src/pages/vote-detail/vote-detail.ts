@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Media } from '../../provider/Media';
 import { Tools } from '../../provider/Tools';
@@ -45,16 +45,19 @@ export class VoteDetailPage {
 
   ionViewDidLoad() {
     setTimeout(() => {
-      this.loadComments();
+      this.mediaServ.ViewVote(this.vote.id)
+        .then(res => {
+          // console.log(res);
+          // this.vote.view_count += 1;
+          if (res && res['data']) {
+            this.vote = res['data'];
+          }
+        })
+        .catch(err => {});
     }, 100);
 
     setTimeout(() => {
-      this.mediaServ.ViewVote(this.vote.id)
-        .then(res => {
-          console.log(res);
-          this.vote.view_count += 1;
-        })
-        .catch(err => {});
+      this.loadComments();
     }, 200);
   }
 
@@ -98,6 +101,22 @@ export class VoteDetailPage {
     });
   }
 
+  selectItem(item) {
+    if (this.vote.type === 1) {
+      // 单选
+      // 取消选中所有的
+      this.vote.vote_items.map( (inItem) => {
+        if (inItem !== item) {
+          inItem.selected = false;
+        }
+      });
+    } else if (this.vote.type === 2) {
+      // 多选
+    }
+
+    item.selected = !item.selected;
+  }
+
   loadMore(ev) {
     if (this.pageNum < this.totalPage) {
       this.pageNum ++;
@@ -106,6 +125,32 @@ export class VoteDetailPage {
         ev.complete();
       });
     }
+  }
+
+  commit() {
+    let voteItems = this.vote.vote_items || [];
+
+    let answers: any = [];
+    voteItems.forEach(element => {
+      if (element.selected) {
+        answers.push(element.id);
+      }
+    });
+    if (answers.length === 0) {
+      this.tools.showToast('必须选择一个投票选项');
+      return;
+    }
+
+    this.mediaServ.CommitVote(this.vote.id, answers.join(','))
+      .then(res => {
+        if (res && res['data']) {
+          this.vote = res['data'];
+        }
+      })
+      .catch(error => {
+        this.tools.showToast(error.message || '投票出错了~');
+      });
+
   }
 
   writeComment() {
