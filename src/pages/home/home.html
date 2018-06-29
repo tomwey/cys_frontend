@@ -62,10 +62,22 @@
     <div class="features">
       <ion-grid>
         <ion-row>
-          <ion-col col-4 *ngFor="let feature of entryData.featured">
+          <ion-col col-4>
             <div class="feature">
-              <h4>{{feature.title}}</h4>
-              <p text-wrap>{{feature.subtitle}}</p>
+              <img src="assets/imgs/icon_music_person.png">
+              <h4>艺人库</h4>
+            </div>
+          </ion-col>
+          <ion-col col-4>
+            <div class="feature">
+                <img src="assets/imgs/icon_vote.png">
+                <h4>投票</h4>
+            </div>
+          </ion-col>
+          <ion-col col-4>
+            <div class="feature">
+              <img src="assets/imgs/icon_mxjj.png">
+              <h4>梦想基金</h4>
             </div>
           </ion-col>
         </ion-row>

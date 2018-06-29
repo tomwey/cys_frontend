@@ -96,45 +96,6 @@ page-home {
             // margin-top: 1px;
             background: color($colors, primary);
         }
-        // .vote-item {
-        //     ion-row, ion-col {
-        //         margin: 0;
-        //         padding: 0;
-        //     }
-        //     h4 {
-        //         font-size: 14px;
-        //         font-weight: normal;
-        //         color: #333;
-        //     }
-
-        //     .progressbar {
-        //         margin-top: 8px;
-        //         width: 100%;
-        //         // border: 0.55px solid #e6e6e6;
-        //         height: 6px;
-        //         background: rgb(221,221,221);
-        //     }
-
-        //     .progressbar-inner {
-        //         // width: 40%;
-        //         height: 6px;
-        //         // height: 100%;
-        //         // margin-top: 1px;
-        //         background: color($colors, primary);
-        //     }
-
-        //     .digits {
-        //         text-align: right;
-        //         font-size: 18px;
-        //         color: rgb(149,149,149);
-        //         font-weight: normal;
-        //         .unit {
-        //             margin-left: 2px;
-        //             font-size: 10px;
-        //             color: #666;
-        //         }
-            // }
-        // }
     }
 
     .features {
@@ -154,22 +115,26 @@ page-home {
             }
         }
         .feature {
-            text-align: left;
+            text-align: center;
             padding: 15px;
             h4 {
                 font-size: 14px;
                 font-weight: normal;
-                color: #333;
+                color: #666;
                 margin: 0;
                 padding: 0;
+                // margin-bottom: 5px;
+            }
+            img {
+                max-width: 22px;
                 margin-bottom: 5px;
             }
-            p {
-                margin: 0;
-                padding: 0;
-                font-size: 12px;
-                color: #999;
-            }
+            // p {
+            //     margin: 0;
+            //     padding: 0;
+            //     font-size: 12px;
+            //     color: #999;
+            // }
         }
     }
 

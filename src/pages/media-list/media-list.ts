@@ -45,7 +45,10 @@ export class MediaListPage {
   }
 
   ionViewDidLoad() {
-    this.loadData();
+    setTimeout(() => {
+      this.loadData();
+    }, 350);
+    
   }
 
   selectItem(type) {

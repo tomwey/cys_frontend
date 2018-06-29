@@ -3,6 +3,7 @@ import { /*IonicPage, */NavController, NavParams, Slides, App, Content, Events }
 import { ApiService } from '../../provider/api-service';
 import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 import { Users } from '../../provider/Users';
+import { MediaListPage } from '../media-list/media-list';
 
 /**
  * Generated class for the HomePage page.
@@ -28,7 +29,6 @@ export class HomePage {
     private api: ApiService,
     private app: App,
     private users: Users,
-    private events: Events,
     private iosFixed: iOSFixedScrollFreeze,
     public navParams: NavParams) {
   }
@@ -65,7 +65,7 @@ export class HomePage {
   }
 
   openMoreMV() {
-    this.events.publish('open:mv');
+    this.app.getRootNavs()[0].push(MediaListPage);
   }
 
   ionViewDidEnter() {

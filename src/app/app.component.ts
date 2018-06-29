@@ -24,7 +24,6 @@ export class MyApp {
     private tools: Tools,
     private appManager: AppManager,
     private wechat: Wechat,
-    private events: Events,
     splashScreen: SplashScreen) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
