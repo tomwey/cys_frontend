@@ -27,7 +27,7 @@
             <!-- </ion-avatar> -->
             <h4>{{perform.name}}</h4>
             <p>{{perform.school}}</p>
-            <button ion-button small>关注</button>
+            <button ion-button small (click)="follow(perform);">{{perform.followed ? '已关注' : '关注'}}</button>
           </div>
         </ion-col>
       </ion-row>

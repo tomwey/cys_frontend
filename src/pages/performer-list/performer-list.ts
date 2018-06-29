@@ -80,6 +80,22 @@ export class PerformerListPage {
     });
   }
 
+  follow(performer) {
+    const action = !performer.followed ? 'create' : 'delete';
+
+    this.media.Follow(action, 'Performer', performer.id)
+      .then(res => {
+        if (action == 'create') {
+          performer.followed = true;
+        } else {
+          performer.followed = false;
+        }
+      })
+      .catch(error => {
+        this.tools.showToast(error.message || '服务器出错了~');
+      });
+  }
+
   loadMore(e) {
     if (this.pageNum < this.totalPage) {
       this.pageNum ++;

@@ -225,4 +225,19 @@ export class Media {
             });
         });
     }
+
+    Follow(action, type, followID) {
+        return new Promise((resolve, reject) => {
+            this.users.token().then(token => {
+                this.api.POST(`follows/${action}`, 
+                    {token: token, follow_type: type, follow_id: followID})
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    })
+            });
+        });
+    }
 }

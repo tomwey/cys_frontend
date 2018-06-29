@@ -4,6 +4,8 @@ import { ApiService } from '../../provider/api-service';
 import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 import { Users } from '../../provider/Users';
 import { MediaListPage } from '../media-list/media-list';
+import { Media } from '../../provider/Media';
+import { Tools } from '../../provider/Tools';
 
 /**
  * Generated class for the HomePage page.
@@ -28,7 +30,9 @@ export class HomePage {
   constructor(public navCtrl: NavController, 
     private api: ApiService,
     private app: App,
+    private mediaServ: Media,
     private users: Users,
+    private tools: Tools,
     private alertCtrl: AlertController,
     private iosFixed: iOSFixedScrollFreeze,
     public navParams: NavParams) {
@@ -99,6 +103,22 @@ export class HomePage {
     if (this.slides) {
       this.slides.stopAutoplay();  
     }
+  }
+
+  follow(performer) {
+    const action = !performer.followed ? 'create' : 'delete';
+
+    this.mediaServ.Follow(action, 'Performer', performer.id)
+      .then(res => {
+        if (action == 'create') {
+          performer.followed = true;
+        } else {
+          performer.followed = false;
+        }
+      })
+      .catch(error => {
+        this.tools.showToast(error.message || '服务器出错了~');
+      });
   }
 
   vote() {
