@@ -107,7 +107,19 @@ page-vote-detail {
             font-weight: normal;
             // padding: 5px 0;
             padding-bottom: 15px;
-            border-bottom: 0.55px solid #e6e6e6;
+            border-bottom: 0.55px solid #ccc;
+        }
+
+        .list-ios > .item-block:first-child {
+            border-top: none;
+        }
+
+        .list-ios .item-block .item-inner {
+            border: 0;
+        }
+
+        .list-ios > .item-block:last-child {
+            border-bottom: none;
         }
 
         .body {
