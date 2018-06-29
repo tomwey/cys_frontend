@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { /*IonicPage, */NavController, NavParams, Slides, App, Content } from 'ionic-angular';
 import { ApiService } from '../../provider/api-service';
 import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
+import { Users } from '../../provider/Users';
 
 /**
  * Generated class for the HomePage page.
@@ -26,6 +27,7 @@ export class HomePage {
   constructor(public navCtrl: NavController, 
     private api: ApiService,
     private app: App,
+    private users: Users,
     private iosFixed: iOSFixedScrollFreeze,
     public navParams: NavParams) {
   }
@@ -38,7 +40,8 @@ export class HomePage {
   }
 
   loadData() {
-    this.api.GET('entry', null, '正在加载')
+    this.users.token().then(token => {
+      this.api.GET('entry', {token: token}, '正在加载')
       .then(data => {
         if (data && data['data']) {
           this.entryData = data['data'];
@@ -56,6 +59,8 @@ export class HomePage {
       .catch(error => {
         this.error = error;
       });
+    });
+    
   }
 
   ionViewDidEnter() {

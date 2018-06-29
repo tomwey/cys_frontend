@@ -80,6 +80,8 @@ page-vote-detail {
             text-align: center;
             font-size: 16px;
             color: #333;
+            margin: 0;
+            padding: 0;
             // font-weight: normal;
         }
 
@@ -88,5 +90,87 @@ page-vote-detail {
             font-size: 14px;
             color: #999;
         }
+    }
+
+    .reply-btn {
+        float: right;
+    }
+
+    .comments {
+        padding: 15px;
+        background: rgb(247,247,247);
+        .title {
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            color: #333;
+            font-weight: normal;
+            // padding: 5px 0;
+            padding-bottom: 15px;
+            border-bottom: 0.55px solid #e6e6e6;
+        }
+
+        .body {
+            .text {
+                color: #666;
+                font-size: 14px;
+            }
+            .time {
+                color: #999;
+                margin-top: 5px;
+                font-size: 12px;
+            }
+        }
+
+        ion-list,ion-item {
+            background:transparent;
+        }
+
+        .empty-error-box {
+            margin-top: 20px;
+            border: 0;
+            padding: 20px;
+        }
+
+        ion-row, ion-col {
+            margin: 0;
+            padding: 0;
+        }
+
+        .replies {
+            background-color: rgb(235,241,241);
+            padding: 5px;
+            margin-top: 10px;
+            .reply {
+                color: #666;
+            }
+        }
+
+        
+        
+        // margin-top: 10px;
+    }
+
+    .vote-stats {
+        ion-row, ion-col {
+            margin: 0;
+            padding: 0;
+        }
+        .view-count {
+            font-size: 14px;
+            color: #999;
+        }
+
+        button {
+            color: #999;
+        }
+    }
+
+    .reply-btn {
+        color: color($colors, primary);
+    }
+
+    .liked {
+        color: color($colors, primary);
     }
 }

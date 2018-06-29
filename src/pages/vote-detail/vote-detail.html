@@ -67,5 +67,59 @@
       </ion-card>
       <p class="vote-warn">注：投票截止时间为{{vote.expire_time}}</p>
     </div>
+    <div class="vote-stats">
+      <ion-row>
+        <ion-col col-6>
+          <span class="view-count">阅读 {{vote.view_count}}</span>
+        </ion-col>
+        <ion-col col-6 style="text-align:right;">
+          <button ion-button icon-start clear small (click)="like($event,vote);">
+            <ion-icon name="md-heart" [class.liked]="vote.liked"></ion-icon>
+            <div>{{vote.likes_count  | num2str}}</div>
+          </button>
+        </ion-col>
+      </ion-row>
+    </div>
   </div>
+
+  <div class="comments">
+    <h2 class="title">精选评论<span class="reply-btn" tappable (click)="writeComment();">写评论</span></h2>
+    <div class="empty-error-box" *ngIf="!!error">
+      {{error}}
+    </div>
+    <ion-list>
+      <ion-item *ngFor="let comment of comments">
+        <ion-row>
+          <ion-col col-2>
+              <ion-avatar>
+                  <img [src]="comment.user.avatar || 'assets/imgs/default_avatar.png'">
+                </ion-avatar>
+          </ion-col>
+          <ion-col col-10>
+              <div class="body">
+                <div tappable (click)="reply(comment);">
+                  <h2>{{comment.user.nickname}}</h2>
+                  <p class="text">{{comment.content}}</p>
+                  <p class="time">{{comment.time | timeAgo:'YYYY-MM-DD HH:mm:ss'}}</p>
+                </div>
+                <div class="replies" *ngIf="comment.replies.length > 0">
+                  <p class="reply" tappable (click)="reply(comment, rep.from_user.id);" *ngFor="let rep of comment.replies" text-wrap>
+                    <span class="name">{{rep.from_user.nickname}}{{rep.to_user ? (' 回复 ' + rep.to_user.nickname )  : ''}}:</span> {{rep.content}}
+                  </p>
+                </div>
+              </div>
+          </ion-col>
+        </ion-row>
+        
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)" [enabled]="hasMore">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="正在加载...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
 </ion-content>

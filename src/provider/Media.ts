@@ -169,4 +169,18 @@ export class Media {
             });
         });
     }
+
+    ViewVote(voteID) {
+        return new Promise((resolve, reject) => {
+            this.users.token().then(token => {
+                this.api.POST(`votes/${voteID}/view`, {token: token})
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    })
+            });
+        });
+    }
 }
