@@ -43,45 +43,98 @@ page-home {
 
     .votes {
         margin-top: 10px;
-        .vote-item {
-            ion-row, ion-col {
-                margin: 0;
-                padding: 0;
-            }
-            h4 {
+        table {
+            width: 100%;
+            td {
+                vertical-align: bottom;
                 font-size: 14px;
-                font-weight: normal;
-                color: #333;
+                // background: red;
+                padding: 10px 5px;
             }
 
-            .progressbar {
-                margin-top: 8px;
-                width: 100%;
-                // border: 0.55px solid #e6e6e6;
-                height: 6px;
-                background: rgb(221,221,221);
+            .base {
+                width: 65%;
             }
 
-            .progressbar-inner {
-                // width: 40%;
-                height: 6px;
-                // height: 100%;
-                // margin-top: 1px;
-                background: color($colors, primary);
-            }
-
-            .digits {
-                text-align: right;
+            .tickets {
+                width: 25%;
                 font-size: 18px;
+                text-align: right;
                 color: rgb(149,149,149);
-                font-weight: normal;
-                .unit {
-                    margin-left: 2px;
-                    font-size: 10px;
-                    color: #666;
-                }
+            }
+
+            .percent {
+                width: 10%;
+                font-size: 18px;
+                text-align: right;
+                color: rgb(149,149,149);
+            }
+
+            .unit {
+                font-size: 10px;
             }
         }
+
+        h4 {
+            font-size: 14px;
+            font-weight: normal;
+            color: #333;
+        }
+
+        .progressbar {
+            margin-top: 8px;
+            width: 100%;
+            // border: 0.55px solid #e6e6e6;
+            height: 6px;
+            background: rgb(221,221,221);
+        }
+
+        .progressbar-inner {
+            // width: 40%;
+            height: 6px;
+            // height: 100%;
+            // margin-top: 1px;
+            background: color($colors, primary);
+        }
+        // .vote-item {
+        //     ion-row, ion-col {
+        //         margin: 0;
+        //         padding: 0;
+        //     }
+        //     h4 {
+        //         font-size: 14px;
+        //         font-weight: normal;
+        //         color: #333;
+        //     }
+
+        //     .progressbar {
+        //         margin-top: 8px;
+        //         width: 100%;
+        //         // border: 0.55px solid #e6e6e6;
+        //         height: 6px;
+        //         background: rgb(221,221,221);
+        //     }
+
+        //     .progressbar-inner {
+        //         // width: 40%;
+        //         height: 6px;
+        //         // height: 100%;
+        //         // margin-top: 1px;
+        //         background: color($colors, primary);
+        //     }
+
+        //     .digits {
+        //         text-align: right;
+        //         font-size: 18px;
+        //         color: rgb(149,149,149);
+        //         font-weight: normal;
+        //         .unit {
+        //             margin-left: 2px;
+        //             font-size: 10px;
+        //             color: #666;
+        //         }
+            // }
+        // }
     }
 
     .features {
@@ -134,7 +187,7 @@ page-home {
 
         .title, .view-count {
             font-size: 14px;
-            color: #333;
+            color: #666;
             padding: 5px 0;
             text-overflow: ellipsis;
             white-space: nowrap;

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { /*IonicPage, */NavController, NavParams, Slides, App, Content } from 'ionic-angular';
+import { /*IonicPage, */NavController, NavParams, Slides, App, Content, Events } from 'ionic-angular';
 import { ApiService } from '../../provider/api-service';
 import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 import { Users } from '../../provider/Users';
@@ -28,6 +28,7 @@ export class HomePage {
     private api: ApiService,
     private app: App,
     private users: Users,
+    private events: Events,
     private iosFixed: iOSFixedScrollFreeze,
     public navParams: NavParams) {
   }
@@ -61,6 +62,10 @@ export class HomePage {
       });
     });
     
+  }
+
+  openMoreMV() {
+    this.events.publish('open:mv');
   }
 
   ionViewDidEnter() {
