@@ -25,6 +25,20 @@ export class Media {
         });
     }
 
+    GetMyMedia(performerID, pageNum, pageSize) {
+        return new Promise((resolve, reject) => {
+            this.users.token().then(token => {
+                this.api.GET(`media/my_list`, { token: token, id:performerID, page: pageNum, size: pageSize })
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    })
+            });
+        });
+    }
+
     GetMediaHistories(pageNum, pageSize) {
         return new Promise((resolve, reject) => {
             this.users.token().then(token => {
@@ -245,6 +259,44 @@ export class Media {
             this.users.token().then(token => {
                 this.api.POST(`follows/${action}`, 
                     {token: token, follow_type: type, follow_id: followID})
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    })
+            });
+        });
+    }
+
+    GetFollowers(ownerType, ownerID,pageNum, pageSize) {
+        return new Promise((resolve, reject) => {
+            this.users.token().then(token => {
+                this.api.GET(`follows/users`, 
+                    {
+                        token: token, 
+                        owner_type: ownerType, 
+                        owner_id: ownerID,  
+                        page: pageNum, 
+                        size: pageSize})
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    })
+            });
+        });
+    }
+
+    GetFollowings(pageNum, pageSize) {
+        return new Promise((resolve, reject) => {
+            this.users.token().then(token => {
+                this.api.GET(`user/followings`, 
+                    {
+                        token: token,   
+                        page: pageNum, 
+                        size: pageSize})
                     .then(data => {
                         resolve(data);
                     })

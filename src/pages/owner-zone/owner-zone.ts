@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Media } from '../../provider/Media';
+import { Tools } from '../../provider/Tools';
+import { ImageViewerController } from 'ionic-img-viewer';
+import { App } from 'ionic-angular/components/app/app';
 
 /**
  * Generated class for the OwnerZonePage page.
@@ -17,13 +21,185 @@ export class OwnerZonePage {
 
   owner: any = null;
   ownerType: string = null;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+  dataType: string = 'topic';
+
+  dataTypes: any = null;
+
+  pageNum: number = 1;
+  totalPage: number = 1;
+  pageSize: number = 20;
+
+  // 加载数据
+  error: any = null;
+  data: any = [];
+
+  hasMore: boolean = false;
+
+  currentMedia: any = null;
+  
+  constructor(public navCtrl: NavController, 
+    private media: Media,
+    private tools: Tools,
+    private app: App,
+    private imageVC: ImageViewerController,
+    public navParams: NavParams) {
     this.owner = this.navParams.data.owner;
-    this.ownerType = this.navParams.data.ownerType;
+    this.ownerType = this.navParams.data.type;
+
+    if (this.ownerType == 'user') {
+      this.dataTypes = [
+        {
+          label: '动态',
+          value: 'topic',
+        },
+        {
+          label: '喜欢',
+          value: 'like'
+        },
+        {
+          label: '粉丝',
+          value: 'follower'
+        },
+        {
+          label: '关注',
+          value: 'follow'
+        }
+      ];
+    } else {
+      this.dataTypes = [
+        // {
+        //   label: '动态',
+        //   value: 'topic',
+        // },
+        {
+          label: 'MV',
+          value: 'mv'
+        },
+        {
+          label: '粉丝',
+          value: 'follower'
+        }
+      ];
+    }
+
+    this.dataType = this.dataTypes[0].value;
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad OwnerZonePage');
+    // console.log('ionViewDidLoad OwnerZonePage');
+
+    setTimeout(() => {
+      this.loadData();
+    }, 300);
+  }
+
+  openOwnerZone(owner) {
+    console.log(owner);
+    this.app.getRootNavs()[0].push('OwnerZonePage', { owner: owner, type: owner.type || 'user' });
+  }
+
+  openMedia(media) {
+    this.app.getRootNavs()[0].push('MediaDetailPage', media);
+  }
+
+  openTopic(topic) {
+    if (topic.type == 0) {
+      this.app.getRootNavs()[0].push('MediaDetailPage', topic.media);
+    } else {
+      this.app.getRootNavs()[0].push('TopicDetailPage', topic);
+    }
+  }
+
+  presentImage(ev: Event, myImage) {
+    ev.stopPropagation();
+    const imageViewer = this.imageVC.create(myImage);
+    imageViewer.present();
+  }
+
+  segChanged() {
+    this.data = [];
+    this.error = null;
+    this.pageNum = 1;
+    this.totalPage = 1;
+
+    this.loadData();
+  }
+
+  getAPIInterface() {
+    switch (this.dataType) {
+      case 'mv':
+        return this.media.GetMyMedia(this.owner.id, this.pageNum, this.pageSize);
+      case 'topic':
+        return this.media.GetTopic('my_list', this.pageNum, this.pageSize);
+      case 'like':
+        return this.media.GetTopic('liked', this.pageNum, this.pageSize);
+      case 'follower':
+        return this.media.GetFollowers(
+          this.ownerType, 
+          this.owner.id, 
+          this.pageNum, 
+          this.pageSize);
+      case 'follow':
+        return  this.media.GetFollowings(this.pageNum, this.pageSize);
+    
+      default:
+        break;
+    }
+
+    return null;
+  }
+
+  loadData() {
+    return new Promise((resolve) => {
+      let promise = this.getAPIInterface();
+      if (promise) {
+        promise.then(res => {
+          const data = res['data'];
+          const total = res['total'];
+
+          if (this.pageNum === 1) {
+            this.data = data;
+            if (this.data.length == 0) {
+              this.error = "暂无数据";
+            } else {
+              this.error = null;
+            }
+          } else {
+            let temp = this.data || [];
+            this.data = temp.concat(data);
+            this.error = null;
+          }
+
+          this.totalPage = (total + this.pageSize - 1) / this.pageSize;
+          
+          // this.totalPage = Math.floor((data.total + this.pageSize - 1) / this.pageSize); 
+          this.hasMore = this.totalPage > this.pageNum;
+
+          resolve(true);
+        })
+        .catch(error => {
+          if (this.pageNum == 1) {
+            this.error = error.message;
+          } else {
+            this.error = null;
+            this.tools.showToast(error.message || error);
+          }
+          resolve(false);
+        });
+      }
+        
+    });
+  }
+
+  loadMore(e) {
+    if (this.pageNum < this.totalPage) {
+      this.pageNum ++;
+
+      this.loadData().then(() => {
+        e.complete();
+      });
+    }
   }
 
 }
