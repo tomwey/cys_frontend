@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { /*IonicPage,*/ NavController, NavParams, App, AlertController, Events, ModalController, Content } from 'ionic-angular';
+import { /*IonicPage,*/ NavController, NavParams, App, AlertController, Events, Content } from 'ionic-angular';
 import { Users } from '../../provider/Users';
 import { LoginPage } from '../../pages/login/login';
 import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
@@ -28,7 +28,7 @@ export class SettingPage {
     private app: App,
     private events: Events,
     private iosFixed: iOSFixedScrollFreeze,
-    private modalCtrl: ModalController,
+    // private modalCtrl: ModalController,
     private alertCtrl: AlertController,
     public navParams: NavParams) {
   }
@@ -74,6 +74,10 @@ export class SettingPage {
     .catch(errror => {});
   }
 
+  openZone(owner) {
+    this.app.getRootNavs()[0].push('OwnerZonePage', { owner: owner, type: 'user' });
+  }
+
   loadUserData() {
     this.users.GetUserProfile()
       .then(res => {
@@ -88,38 +92,8 @@ export class SettingPage {
     this.app.getRootNavs()[0].push('UserProfilePage', this.user);
   }
 
-  charge() {
-    let modal = this.modalCtrl.create('ChargePage');
-    modal.onDidDismiss((data) => {
-      if (data) {
-        this.loadUserData();
-      };
-    })
-    modal.present();
-  }
+  gotoHistory() {
 
-  gotoWallet() {
-    this.app.getRootNavs()[0].push('WalletPage');
-  }
-
-  gotoPayMoney() {
-    this.app.getRootNavs()[0].push('RedpackConsumePage');
-  }
-
-  newVIP() {
-    this.alertCtrl.create({
-      title: '即将上线',
-      message: '',
-      buttons: [
-        {
-          text: '确定',
-          role: '',
-          handler: () => {
-            // console.log('Cancel clicked');
-          }
-        }
-      ]
-    }).present();
   }
 
   openPage(title, slug) {

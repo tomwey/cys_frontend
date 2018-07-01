@@ -14,45 +14,52 @@
 
 <ion-content>
   <div class="user-caption" *ngIf="!!user">
-    <button ion-item (click)="gotoProfile();">
+    <ion-item>
         <ion-avatar item-left>
         <img [src]="user.avatar || 'assets/imgs/default_avatar.png'" />
         </ion-avatar>
       <h2>{{user.nickname}}</h2>
-      <p>{{user.vip_status}}</p>
-    </button>
-   
+      <p></p>
+      <ion-note item-end>
+        <button ion-button small (click)="openZone(user);">个人主页</button>
+      </ion-note>
+    </ion-item>
+   <div class="stat-box">
     <ion-grid>
       <ion-row>
-        <ion-col col-8>
-          <div class="balance cell-box">
-            <h3 class="money">¥ {{user.balance}}</h3>
-            <p>余额</p>
-            <p class="vip" (tap)="openPage('会员特权', 'vip_intro');">会员特权 <ion-icon name="ios-help-outline"></ion-icon></p>
+        <ion-col col-4>
+          <div class="stats">
+            <p class="value">1</p>
+            <p class="label">喜欢</p>
           </div>
         </ion-col>
         <ion-col col-4>
-          <div class="operations cell-box">
-            <button class="charge-button" ion-button (click)="charge();">充值</button><br/>
-            <button class="vip-button" ion-button (click)="newVIP();" color="dark">成为VIP</button>
-            
+          <div class="stats">
+            <p class="value">0</p>
+            <p class="label">粉丝</p>
+          </div>
+        </ion-col>
+        <ion-col col-4>
+          <div class="stats">
+            <p class="value">1</p>
+            <p class="label">关注</p>
           </div>
         </ion-col>
       </ion-row>
     </ion-grid>
-
+  </div>
   </div>
   <ion-list></ion-list>
   <ion-list>
-    <!-- 钱包 -->
-    <button ion-item (click)="gotoWallet();">
-      <ion-icon name="icon_wallet" class="wallet" item-left></ion-icon>
-      钱包
-    </button>
     <!-- 交易明细 -->
-    <button ion-item (click)="gotoPayMoney();">
-      <ion-icon name="icon_trade" class="trade" item-left></ion-icon>
-      消费红包抵扣记录
+    <button ion-item (click)="gotoHistory();">
+        <ion-icon name="ios-list-box-outline" class="trade" item-left></ion-icon>
+        历史播放
+      </button>
+    <!-- 钱包 -->
+    <button ion-item (click)="openPage('校园招募', 'campus_recruiting');">
+      <ion-icon name="ios-microphone-outline" class="wallet" item-left></ion-icon>
+      校园招募
     </button>
   </ion-list>
   <ion-list></ion-list>
@@ -87,10 +94,10 @@
       </ion-item>
   </ion-list> -->
   <!-- <ion-list></ion-list> -->
-  <ion-list>
+  <!-- <ion-list>
     <button ion-item detail-none style="text-align:center; font-size: 14px; color: #BD5450;" (click)="logout();">
       退出登录
     </button>
-  </ion-list>
+  </ion-list> -->
 
 </ion-content>
