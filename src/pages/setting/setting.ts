@@ -88,12 +88,8 @@ export class SettingPage {
       });
   }
 
-  gotoProfile() {
-    this.app.getRootNavs()[0].push('UserProfilePage', this.user);
-  }
-
   gotoHistory() {
-
+    this.app.getRootNavs()[0].push('PlayHistoryPage');
   }
 
   openPage(title, slug) {

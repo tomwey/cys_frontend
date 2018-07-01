@@ -136,6 +136,10 @@ export class HomePage {
 
   }
 
+  openMedia(media) {
+    this.app.getRootNavs()[0].push('MediaDetailPage', media);
+  }
+
   openBanner(banner) {
     // this.app.getRootNavs()[0].push('CloudZoneDetailPage', banner);
     // this.app.getRootNavs()[0].push('ArticlePage', { id: banner.ContentID });

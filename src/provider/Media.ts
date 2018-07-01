@@ -25,6 +25,20 @@ export class Media {
         });
     }
 
+    GetMediaHistories(pageNum, pageSize) {
+        return new Promise((resolve, reject) => {
+            this.users.token().then(token => {
+                this.api.GET(`media/histories`, { token: token, page: pageNum, size: pageSize })
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    })
+            });
+        });
+    }
+
     CreateLike(mediaID, type: any = 'Media') {
         return new Promise((resolve, reject) => {
             this.users.token().then(token => {
