@@ -15,7 +15,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class OwnerZonePage {
 
+  owner: any = null;
+  ownerType: string = null;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.owner = this.navParams.data.owner;
+    this.ownerType = this.navParams.data.ownerType;
   }
 
   ionViewDidLoad() {

@@ -6,13 +6,27 @@
 -->
 <ion-header no-border>
 
-  <ion-navbar>
+  <ion-navbar color="wechat">
     <ion-title></ion-title>
   </ion-navbar>
 
 </ion-header>
 
-
 <ion-content>
-
+  <div class="caption">
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="{{owner.avatar || 'assets/imgs/default_avatar.png'}}" />
+      </ion-avatar>
+      <h2>{{owner.nickname || owner.name}}</h2>
+      <p>{{owner.school || ''}}</p>
+      <ion-note item-end style="text-align: right;">
+        <span class="custom-follow-btn">关注</span>
+        <p>3 粉丝</p>
+      </ion-note>
+    </ion-item>
+  </div>
+  <div class="pager">
+    
+  </div>
 </ion-content>
