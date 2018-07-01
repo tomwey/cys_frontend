@@ -71,6 +71,11 @@ export class TopicListPage {
     imageViewer.present();
   }
 
+  openZone(ev, owner) {
+    ev.stopPropagation();
+    this.app.getRootNavs()[0].push('OwnerZonePage', { owner: owner, type: owner.type })
+  }
+
   selectItem(type) {
     this.dataType = type;
 

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Tools } from '../../provider/Tools';
 import { Media } from '../../provider/Media';
+import { App } from 'ionic-angular/components/app/app';
 
 /**
  * Generated class for the PerformerListPage page.
@@ -31,6 +32,7 @@ export class PerformerListPage {
   constructor(public navCtrl: NavController,
     private tools: Tools,
     private media: Media,
+    private app: App,
     public navParams: NavParams) {
   }
 
@@ -94,6 +96,10 @@ export class PerformerListPage {
       .catch(error => {
         this.tools.showToast(error.message || '服务器出错了~');
       });
+  }
+
+  openZone(perform) {
+    this.app.getRootNavs()[0].push('OwnerZonePage', { owner: perform, type: 'performer' });
   }
 
   loadMore(e) {

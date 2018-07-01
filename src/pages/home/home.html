@@ -150,7 +150,7 @@
             <ion-col col-6 *ngFor="let perform of entryData.performers">
               <div class="performer">
                 <!-- <ion-avatar> -->
-                  <img [src]="perform.avatar" />
+                  <img [src]="perform.avatar" tappable (click)="openZone(perform);"/>
                 <!-- </ion-avatar> -->
                 <h4>{{perform.name}}</h4>
                 <p>{{perform.school}}</p>

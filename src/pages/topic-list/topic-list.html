@@ -37,7 +37,8 @@
       <ion-row>
         <ion-col col-2>
           <ion-avatar>
-            <img src="{{topic.owner?.avatar || 'assets/imgs/default_avatar.png'}}">
+            <img src="{{topic.owner?.avatar || 'assets/imgs/default_avatar.png'}}" tappable 
+              (click)="openZone($event,topic.owner);">
           </ion-avatar>
         </ion-col>
         <ion-col col-10>

@@ -121,6 +121,10 @@ export class HomePage {
       });
   }
 
+  openZone(perform) {
+    this.app.getRootNavs()[0].push('OwnerZonePage', { owner: perform, type: 'performer' });
+  }
+
   vote() {
     this.app.getRootNavs()[0].push('VoteDetailPage', this.entryData.vote);
   }
