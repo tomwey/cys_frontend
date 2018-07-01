@@ -83,7 +83,7 @@ export class OwnerZonePage {
       ];
     }
 
-    this.dataType = this.dataTypes[0].value;
+    this.dataType = this.navParams.data.dataType || this.dataTypes[0].value;
   }
 
   ionViewDidLoad() {

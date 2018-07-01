@@ -74,8 +74,8 @@ export class SettingPage {
     .catch(errror => {});
   }
 
-  openZone(owner) {
-    this.app.getRootNavs()[0].push('OwnerZonePage', { owner: owner, type: 'user' });
+  openZone(owner, dataType = null) {
+    this.app.getRootNavs()[0].push('OwnerZonePage', { owner: owner, type: 'user', dataType: dataType });
   }
 
   loadUserData() {

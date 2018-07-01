@@ -28,20 +28,20 @@
     <ion-grid>
       <ion-row>
         <ion-col col-4>
-          <div class="stats">
-            <p class="value">1</p>
+          <div class="stats" tappable (click)="openZone(user, 'like');">
+            <p class="value">{{user.likes_count}}</p>
             <p class="label">喜欢</p>
           </div>
         </ion-col>
         <ion-col col-4>
-          <div class="stats">
-            <p class="value">0</p>
+          <div class="stats" tappable (click)="openZone(user, 'follower');">
+            <p class="value">{{user.follows_count}}</p>
             <p class="label">粉丝</p>
           </div>
         </ion-col>
         <ion-col col-4>
-          <div class="stats">
-            <p class="value">1</p>
+          <div class="stats" tappable (click)="openZone(user, 'follow');">
+            <p class="value">{{user.following_count}}</p>
             <p class="label">关注</p>
           </div>
         </ion-col>
