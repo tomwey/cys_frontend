@@ -21,8 +21,10 @@
       <h2>{{owner.nickname || owner.name}}</h2>
       <p>{{owner.school || ''}}</p>
       <ion-note item-end style="text-align: right;">
-        <span class="custom-follow-btn">关注</span>
-        <p>{{owner.follows_count}} 粉丝</p>
+        <span class="custom-follow-btn" tappable (click)="follow(owner);">
+          {{owner.followed ? '已关注' : '关注'}}
+        </span>
+        <p style="text-align:center;">{{owner.follows_count}} 粉丝</p>
       </ion-note>
     </ion-item>
   </div>

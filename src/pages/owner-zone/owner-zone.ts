@@ -100,7 +100,7 @@ export class OwnerZonePage {
   }
 
   openOwnerZone(owner) {
-    console.log(owner);
+    // console.log(owner);
     this.app.getRootNavs()[0].push('OwnerZonePage', { owner: owner, type: owner.type || 'user' });
   }
 
@@ -114,6 +114,33 @@ export class OwnerZonePage {
     } else {
       this.app.getRootNavs()[0].push('TopicDetailPage', topic);
     }
+  }
+
+  follow(owner) {
+    const action = !owner.followed ? 'create' : 'delete';
+
+    let type = owner.type;
+    console.log(owner);
+
+    type = type.charAt(0).toUpperCase() + type.slice(1);
+
+    this.media.Follow(action, type, owner.id)
+      .then(res => {
+        if (action == 'create') {
+          owner.followed = true;
+          owner.follows_count += 1;
+
+        } else {
+          owner.followed = false;
+          owner.follows_count -= 1;
+          if (owner.follows_count < 0) {
+            owner.follows_count = 0;
+          }
+        }
+      })
+      .catch(error => {
+        this.tools.showToast(error.message || '服务器出错了~');
+      });
   }
 
   presentImage(ev: Event, myImage) {
