@@ -118,4 +118,10 @@ page-topic-detail {
             }
         }
     }
+
+    .followed {
+        background: white;
+        color: color($colors, primary);
+        border: 0.55px solid color($colors, primary);
+    }
 }

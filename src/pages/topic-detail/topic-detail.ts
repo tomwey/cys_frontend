@@ -109,6 +109,25 @@ export class TopicDetailPage {
     }
   }
 
+  follow(owner) {
+    const action = !owner.followed ? 'create' : 'delete';
+
+    let type = owner.type;
+    type = type.charAt(0).toUpperCase() + type.slice(1);
+
+    this.mediaServ.Follow(action, type, owner.id)
+      .then(res => {
+        if (action == 'create') {
+          owner.followed = true;
+        } else {
+          owner.followed = false;
+        }
+      })
+      .catch(error => {
+        this.tools.showToast(error.message || '服务器出错了~');
+      });
+  }
+
   send() {
     if (this.sendType == 1) {
       this.doReply();

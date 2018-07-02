@@ -21,7 +21,8 @@
         <h2>{{topic.owner?.name}}</h2>
         <p>{{topic.time | timeAgo:'YYYY-MM-DD HH:mm:ss'}}</p>
         <ion-note item-right>
-          <button ion-button small>关注</button>
+          <button ion-button small (click)="follow(topic.owner);" [class.followed]="topic.owner.followed">
+            {{topic.owner.followed ? '已关注' : '关注'}}</button>
         </ion-note>
       </ion-item>
     </div>
