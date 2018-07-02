@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, App, Content } from 'ionic-angular';
 import { Media } from '../../provider/Media';
 import { Tools } from '../../provider/Tools';
+import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 
 /**
  * Generated class for the PlayHistoryPage page.
@@ -28,15 +29,20 @@ export class PlayHistoryPage {
 
   hasMore: boolean = false;
 
+  @ViewChild(Content) content: Content;
+
   constructor(public navCtrl: NavController, 
     private media: Media,
     private tools: Tools,
     private app: App,
+    private iosFixed: iOSFixedScrollFreeze,
     public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad PlayHistoryPage');
+    this.iosFixed.fixedScrollFreeze(this.content);
+    
     setTimeout(() => {
       this.loadData();
     }, 300);

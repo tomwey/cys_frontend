@@ -45,6 +45,8 @@ export class MediaListPage {
   }
 
   ionViewDidLoad() {
+    this.iosFixed.fixedScrollFreeze(this.content);
+    
     setTimeout(() => {
       this.loadData();
     }, 350);

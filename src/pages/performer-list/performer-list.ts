@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { Tools } from '../../provider/Tools';
 import { Media } from '../../provider/Media';
 import { App } from 'ionic-angular/components/app/app';
+import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 
 /**
  * Generated class for the PerformerListPage page.
@@ -29,15 +30,20 @@ export class PerformerListPage {
 
   hasMore: boolean = false;
 
+  @ViewChild(Content) content: Content;
+
   constructor(public navCtrl: NavController,
     private tools: Tools,
     private media: Media,
     private app: App,
+    private iosFixed: iOSFixedScrollFreeze,
     public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad PerformerListPage');
+    this.iosFixed.fixedScrollFreeze(this.content);
+    
     setTimeout(() => {
       this.loadData();
     }, 350);

@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, AlertController, Content } from 'ionic-angular';
 import { Media } from '../../provider/Media';
 import { Tools } from '../../provider/Tools';
+import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 
 /**
  * Generated class for the VoteDetailPage page.
@@ -35,15 +36,20 @@ export class VoteDetailPage {
   replyComment: any = null;
   to_user: any = null;
 
+  @ViewChild(Content) content: Content;
+  
   constructor(public navCtrl: NavController, 
     private mediaServ: Media,
     private tools: Tools,
+    private iosFixed: iOSFixedScrollFreeze,
     private alertCtrl: AlertController,
     public navParams: NavParams) {
       this.vote = this.navParams.data;
   }
 
   ionViewDidLoad() {
+    this.iosFixed.fixedScrollFreeze(this.content);
+
     setTimeout(() => {
       this.mediaServ.ViewVote(this.vote.id)
         .then(res => {

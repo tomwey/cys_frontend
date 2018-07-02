@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, App, Content } from 'ionic-angular';
 import { Tools } from '../../provider/Tools';
 import { Media } from '../../provider/Media';
+import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 
 /**
  * Generated class for the VoteListPage page.
@@ -28,15 +29,20 @@ export class VoteListPage {
 
   hasMore: boolean = false;
 
+  @ViewChild(Content) content: Content;
+  
   constructor(public navCtrl: NavController, 
     private tools: Tools,
     private media: Media,
     private app: App,
+    private iosFixed: iOSFixedScrollFreeze,
     public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad VoteListPage');
+    this.iosFixed.fixedScrollFreeze(this.content);
+
     setTimeout(() => {
       this.loadData();
     }, 300);

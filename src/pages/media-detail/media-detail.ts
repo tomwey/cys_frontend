@@ -1,8 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, TextInput } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, TextInput, Content } from 'ionic-angular';
 import { Media } from '../../provider/Media';
 import { Tools } from '../../provider/Tools';
 import { VgAPI } from 'videogular2/core';
+import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 
 /**
  * Generated class for the MediaDetailPage page.
@@ -38,9 +39,12 @@ export class MediaDetailPage {
   to_user: any = null;
 
   @ViewChild('myInput') input: TextInput;
+  @ViewChild(Content) contentEle: Content;
+
   constructor(public navCtrl: NavController, 
     private mediaServ: Media,
     private tools: Tools,
+    private iosFixed: iOSFixedScrollFreeze,
     public navParams: NavParams) {
     this.media = this.navParams.data;
     // console.log(this.media);
@@ -48,6 +52,7 @@ export class MediaDetailPage {
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad MediaDetailPage');
+    this.iosFixed.fixedScrollFreeze(this.contentEle);
     setTimeout(() => {
       this.loadComments();
     }, 100);

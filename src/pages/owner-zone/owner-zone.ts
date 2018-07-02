@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { Media } from '../../provider/Media';
 import { Tools } from '../../provider/Tools';
 import { ImageViewerController } from 'ionic-img-viewer';
 import { App } from 'ionic-angular/components/app/app';
+import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 
 /**
  * Generated class for the OwnerZonePage page.
@@ -38,10 +39,13 @@ export class OwnerZonePage {
 
   currentMedia: any = null;
   
+  @ViewChild(Content) content: Content;
+
   constructor(public navCtrl: NavController, 
     private media: Media,
     private tools: Tools,
     private app: App,
+    private iosFixed: iOSFixedScrollFreeze,
     private imageVC: ImageViewerController,
     public navParams: NavParams) {
     this.owner = this.navParams.data.owner;
@@ -88,7 +92,8 @@ export class OwnerZonePage {
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad OwnerZonePage');
-
+    this.iosFixed.fixedScrollFreeze(this.content);
+    
     setTimeout(() => {
       this.loadData();
     }, 300);
