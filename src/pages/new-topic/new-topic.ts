@@ -26,6 +26,8 @@ export class NewTopicPage {
 
   originalFiles: any = [];
 
+  audioPlayer: any = null;
+
   constructor(public navCtrl: NavController, 
     private media: Media,
     private tools: Tools,
@@ -34,10 +36,26 @@ export class NewTopicPage {
     private alertCtrl: AlertController,
     private viewCtrl: ViewController,
     public navParams: NavParams) {
+      this.audioPlayer = new Audio();
   }
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad NewTopicPage');
+  }
+
+  playAudio(ev:Event, audio) {
+    ev.stopPropagation();
+
+    audio.playing = !audio.playing;
+
+    this.audioPlayer.src = audio.fileURL;
+
+    if (audio.playing) {
+      this.audioPlayer.play();
+    } else {
+      this.audioPlayer.pause();
+    }
+    
   }
 
   send() {

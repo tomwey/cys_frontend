@@ -72,4 +72,28 @@ page-new-topic {
             }
         }
     }
+
+    .audio-preview {
+        margin-top: -20px;
+        position: relative;
+        padding: 20px;
+        .close-btn {
+            position: absolute;
+            z-index: 200;
+            top: -5px;
+            right: -5px;
+        }
+    }
+
+    .audio-box {
+        background: rgb(247,247,247);
+        .item-inner {
+            border-bottom: 0!important;
+        }
+        
+        ion-icon {
+            font-size: 28px;
+            color: #666;
+        }
+    }
 }

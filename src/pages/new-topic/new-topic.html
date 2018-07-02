@@ -82,6 +82,24 @@
         <ion-icon name="ios-close-circle"></ion-icon>
       </button>
     </div>
+
+    <div class="audio-preview" *ngIf="assetType == 1">
+      <ion-item class="audio-box" *ngFor="let audio of assets">
+        <ion-thumbnail item-left>
+          <img src="assets/imgs/cys_logo.png">
+        </ion-thumbnail>
+        <ion-note item-right>
+          <button ion-button clear (click)="playAudio($event, audio);">
+            <ion-icon name="{{audio.playing ? 'md-pause' : 'md-play'}}"></ion-icon>
+          </button>
+        </ion-note>
+      </ion-item>
+      <button ion-button
+        (click)="remove(assets[0]);" icon-only clear class="close-btn">
+        <ion-icon name="ios-close-circle"></ion-icon>
+      </button>
+    </div>
+
   </div>
 
 </ion-content>
