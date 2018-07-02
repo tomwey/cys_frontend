@@ -212,6 +212,12 @@ page-home {
                 color: #666;
                 margin-bottom: 10px;
             }
+
+            .followed {
+                background: white;
+                color: color($colors, primary);
+                border: 0.55px solid color($colors, primary);
+            }
         }
     }
 }
