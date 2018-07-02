@@ -88,8 +88,18 @@
                     </vg-player>
                   </div>
                 <!-- 音频 -->
-                <div class="audio" *ngIf="topic.type == 2">
-                  
+                <div class="audios" *ngIf="topic.type == 2">
+                  <ion-item class="audio-box" *ngFor="let audio of topic.files">
+                    <ion-thumbnail item-left>
+                      <img src="assets/imgs/cys_logo.png">
+                    </ion-thumbnail>
+                    <ion-note item-right>
+                      <button ion-button clear (click)="playAudio($event, audio);">
+                        <ion-icon name="{{audio.playing ? 'md-pause' : 'md-play'}}"></ion-icon>
+                      </button>
+                    </ion-note>
+                  </ion-item>
+                  <!-- <audio [src]="audio.url" controls *ngFor="let audio of topic.files"></audio> -->
                 </div>
                 <!-- 视频 -->
                 <div class="video media-player" *ngIf="topic.type == 3">

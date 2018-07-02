@@ -38,6 +38,10 @@ export class TopicListPage {
 
   @ViewChild(Content) content: Content;
   
+  audioPlayer: any = null;
+
+  currentAudio: any = null;
+
   constructor(public navCtrl: NavController, 
     private media: Media,
     private tools: Tools,
@@ -46,7 +50,7 @@ export class TopicListPage {
     private imageVC: ImageViewerController,
     private modalCtrl: ModalController,
     public navParams: NavParams) {
-
+    this.audioPlayer = new Audio();
   }
 
   ionViewDidLoad() {
@@ -58,16 +62,28 @@ export class TopicListPage {
     }, 20);
   }
 
-  playOrPause(ev:Event, audio) {
+  playAudio(ev:Event, audio) {
     ev.stopPropagation();
-    
-    // this.audioPlayer.src = audio.url;
-    // this.audioPlayer.play();
 
-    // this.audioPlayer.onprogress = (progress) => {
-    //   console.log(progress);
-    //     audio.progress = progress;
-    // };
+    if (this.currentAudio == audio) {
+      audio.playing = !audio.playing;
+      if (audio.playing) {
+        this.audioPlayer.play();
+      } else {
+        this.audioPlayer.pause();
+      }
+    } else {
+      if (!this.currentAudio) {
+      } else {
+        this.currentAudio.playing = false;
+      }
+
+      this.audioPlayer.src = audio.url;
+      this.audioPlayer.play();
+
+      audio.playing = true;
+      this.currentAudio = audio;
+    }
   }
 
   presentImage(ev: Event, myImage) {
