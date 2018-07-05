@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-import { /*IonicPage,*/ NavController, NavParams, Content } from 'ionic-angular';
-import { ApiService } from '../../provider/api-service';
-import { DomSanitizer } from '@angular/platform-browser';
+import { /*IonicPage,*/ NavController, NavParams, Content, App } from 'ionic-angular';
+// import { ApiService } from '../../provider/api-service';
+// import { DomSanitizer } from '@angular/platform-browser';
 import { Users } from '../../provider/Users';
 import { Tools } from '../../provider/Tools';
 import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
@@ -21,15 +21,16 @@ import { Utils } from '../../provider/Utils';
 })
 export class LoginPage {
 
-  body: any = null;
+  // body: any = null;
   isWeiXin: boolean = false;
 
   @ViewChild(Content) content: Content;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
-    private api: ApiService,
-    private san: DomSanitizer,
+    // private api: ApiService,
+    // private san: DomSanitizer,
+    private app: App,
     private users: Users,
     private iosFixed: iOSFixedScrollFreeze,
     private tools: Tools,
@@ -40,23 +41,23 @@ export class LoginPage {
   ionViewDidLoad() {
     this.iosFixed.fixedScrollFreeze(this.content);
     // console.log('ionViewDidLoad LoginPage');
-    this.loadUserAgreement();
+    // this.loadUserAgreement();
   }
 
-  loadUserAgreement() {
-    this.api.GET('p/user_agreement', null)
-      .then(result => {
-        // console.log(res);
-        let data = result['data'];
+  // loadUserAgreement() {
+  //   this.api.GET('p/user_agreement', null)
+  //     .then(result => {
+  //       // console.log(res);
+  //       let data = result['data'];
 
-        if (data && data.body) {
-          this.body = this.san.bypassSecurityTrustHtml(data.body);
-        }
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
+  //       if (data && data.body) {
+  //         this.body = this.san.bypassSecurityTrustHtml(data.body);
+  //       }
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //     });
+  // }
 
   doLogin() {
     this.users.GetAuthUrl(window.location.href)
@@ -70,8 +71,16 @@ export class LoginPage {
         }
       })
       .catch(error => {
-        console.log(error);
+        // console.log(error);
+        this.tools.showToast('获取认证登录地址失败');
       });
+  }
+
+  openPage() {
+    this.app.getRootNavs()[0].push('BrowserPage', {
+      title: '用户协议',
+      slug: 'user_agreement'
+    });
   }
 
 }

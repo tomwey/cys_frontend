@@ -17,7 +17,7 @@ import { Wechat } from '../provider/Wechat';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any// = TabsPage;
+  rootPage:any = LoginPage;
 
   constructor(platform: Platform, statusBar: StatusBar,
     private users: Users, 
@@ -31,7 +31,7 @@ export class MyApp {
       // statusBar.styleDefault();
       // splashScreen.hide();
 
-      this.loginIfNeeded();
+      // this.loginIfNeeded();
 
       /*
       let rid = Utils.getQueryString('rid');
