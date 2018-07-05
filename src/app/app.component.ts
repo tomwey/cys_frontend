@@ -17,19 +17,21 @@ import { Wechat } from '../provider/Wechat';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = TabsPage;
+  rootPage:any// = TabsPage;
 
   constructor(platform: Platform, statusBar: StatusBar,
     private users: Users, 
     private tools: Tools,
     private appManager: AppManager,
-    private wechat: Wechat,
+    // private wechat: Wechat,
     splashScreen: SplashScreen) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
-      splashScreen.hide();
+      // statusBar.styleDefault();
+      // splashScreen.hide();
+
+      this.loginIfNeeded();
 
       /*
       let rid = Utils.getQueryString('rid');
@@ -71,6 +73,47 @@ export class MyApp {
     });
   }
 
+  loginIfNeeded() {
+    this.users.token().then(token => {
+      if (!token) {
+        let code = Utils.getQueryString('code');
+        let provider = Utils.getQueryString('provider');
+        this.loginFor(code, provider, TabsPage);
+      } else {
+        this.forwardToPage(TabsPage, null);
+      }
+    })
+  }
+
+  loginFor(code, provider, page: any) {
+    if (code && provider) {
+      // 绑定登录
+      this.users.bindAuth(code, provider, null)
+        .then(data => {
+          if (data && data.data) {
+            let token = data.data.token;
+            this.users.saveToken(token).then(() => {
+              // this.rootPage = TabsPage;
+              this.forwardToPage(page, null);
+            });
+          } else {
+            this.tools.showToast('登录失败~');
+            this.rootPage = LoginPage;
+          }
+        })
+        .catch(error => {
+          this.tools.showToast('认证登录失败了~');
+        });
+    } else {
+      // this.tools.showToast('登录失败~');
+      this.rootPage = LoginPage;
+    }
+  }
+
+  forwardToPage(page: any, params: any) {
+    this.rootPage = page;
+  }
+
   handlePageForward(params) {
     // alert(params.rid);
     // if (!params.rid && !params.rrid && !params.uid) { // APP入口没有带参数
@@ -78,13 +121,6 @@ export class MyApp {
     // } else {
       // 抢红包界面
       // console.log(rid);
-      this.wechat.GetConfig(window.location.href)
-        .then(data => {
-
-        })
-        .catch(error => {
-
-        });
 
       this.appManager.shareData = params;
 

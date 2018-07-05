@@ -33,5 +33,15 @@ export class Utils
   static md5(string): string {
     return Md5.hashStr(string, false).toString();
   }
+
+  static isWeiXin(): boolean {
+    let ua = window.navigator.userAgent.toLowerCase();
+    let results: RegExpMatchArray = ua.match(/MicroMessenger/i);
+    if(results && results.toString() == 'micromessenger') {
+      return true;
+    } else {
+      return false;
+    }
+  }
   
 }

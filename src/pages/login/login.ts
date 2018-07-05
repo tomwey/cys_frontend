@@ -5,6 +5,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Users } from '../../provider/Users';
 import { Tools } from '../../provider/Tools';
 import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
+import { Utils } from '../../provider/Utils';
 
 /**
  * Generated class for the LoginPage page.
@@ -21,6 +22,7 @@ import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 export class LoginPage {
 
   body: any = null;
+  isWeiXin: boolean = false;
 
   @ViewChild(Content) content: Content;
 
@@ -32,6 +34,7 @@ export class LoginPage {
     private iosFixed: iOSFixedScrollFreeze,
     private tools: Tools,
   ) {
+    this.isWeiXin = Utils.isWeiXin();
   }
 
   ionViewDidLoad() {

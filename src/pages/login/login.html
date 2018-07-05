@@ -25,5 +25,8 @@
   
   </ion-content>
   <ion-footer style="background-color: white;">
-    <div padding><button ion-button block (click)="doLogin()" [disabled]="!body">登录即表示同意用户使用协议</button></div>
+    <div padding><button ion-button block (click)="doLogin()" [disabled]="!body">
+      <!-- 登录即表示同意用户使用协议 -->
+      {{isWeiXin ? '微信登录' : 'QQ登录'}}
+    </button></div>
   </ion-footer>
