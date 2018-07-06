@@ -9,6 +9,8 @@ page-setting {
         // }
         // background: color($colors, wechat);
         // margin-bottom: 30px;
+        padding: 20px 0;
+        background: white;
         .stat-box {
             background: white;
             ion-row, ion-col {
@@ -17,7 +19,7 @@ page-setting {
                 padding: 0;
             }
             .stats {
-                padding: 15px 0;
+                padding-top: 15px;
 
                 p {
                     margin: 0;
