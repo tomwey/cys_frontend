@@ -25,13 +25,15 @@ export class MyApp {
     private appManager: AppManager,
     // private wechat: Wechat,
     splashScreen: SplashScreen) {
+      this.loginIfNeeded();
+      
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       // statusBar.styleDefault();
       // splashScreen.hide();
 
-      this.loginIfNeeded();
+      // this.loginIfNeeded();
 
       /*
       let rid = Utils.getQueryString('rid');
