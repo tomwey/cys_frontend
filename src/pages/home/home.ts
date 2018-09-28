@@ -143,6 +143,14 @@ export class HomePage {
   openBanner(banner) {
     // this.app.getRootNavs()[0].push('CloudZoneDetailPage', banner);
     // this.app.getRootNavs()[0].push('ArticlePage', { id: banner.ContentID });
+    console.log(banner);
+    if (banner.link) {
+      window.open(banner.link);
+    } else if (banner.vote) {
+      this.app.getRootNavs()[0].push('VoteDetailPage', banner.vote);
+    } else if (banner.media) {
+      this.openMedia(banner.media);
+    }
   }
 
 }

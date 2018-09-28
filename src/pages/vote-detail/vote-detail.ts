@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController, Content } from 'i
 import { Media } from '../../provider/Media';
 import { Tools } from '../../provider/Tools';
 import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
+import { App } from 'ionic-angular/components/app/app';
 
 /**
  * Generated class for the VoteDetailPage page.
@@ -41,6 +42,7 @@ export class VoteDetailPage {
   constructor(public navCtrl: NavController, 
     private mediaServ: Media,
     private tools: Tools,
+    private app: App,
     private iosFixed: iOSFixedScrollFreeze,
     private alertCtrl: AlertController,
     public navParams: NavParams) {
@@ -107,6 +109,10 @@ export class VoteDetailPage {
     });
   }
 
+  openZone(perform) {
+    this.app.getRootNavs()[0].push('OwnerZonePage', { owner: perform, type: 'performer' });
+  }
+
   selectItem(item) {
     if (this.vote.type === 1) {
       // 单选
@@ -131,6 +137,21 @@ export class VoteDetailPage {
         ev.complete();
       });
     }
+  }
+
+  sendVote(item) {
+    if (item.voted) return;
+
+    this.mediaServ.CommitVote(this.vote.id, item.id)
+    .then(res => {
+      if (res && res['data']) {
+        this.vote = res['data'];
+      }
+      item.voted = true;
+    })
+    .catch(error => {
+      this.tools.showToast(error.message || '投票出错了~');
+    });
   }
 
   commit() {
