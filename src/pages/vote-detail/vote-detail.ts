@@ -62,11 +62,11 @@ export class VoteDetailPage {
           }
         })
         .catch(err => {});
-    }, 100);
+    }, 200);
 
     setTimeout(() => {
       this.loadComments();
-    }, 200);
+    }, 300);
   }
 
   loadComments() {

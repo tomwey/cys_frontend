@@ -24,7 +24,7 @@ export class HomePage {
   entryData: any = null;
   error: any = null;
 
-  @ViewChild(Slides) slides: Slides;
+  @ViewChild('slides') slides: Slides;
   @ViewChild(Content) content: Content;
 
   constructor(public navCtrl: NavController, 
@@ -94,12 +94,15 @@ export class HomePage {
   }
 
   ionViewDidEnter() {
+    // console.log(this.slides);
     if (this.slides) {
+      // console.log('123');
       this.slides.startAutoplay();
     }
   }
 
   ionViewDidLeave() {   
+    // console.log(this.slides);
     if (this.slides) {
       this.slides.stopAutoplay();  
     }

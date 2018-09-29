@@ -19,7 +19,7 @@
   <div class="entry-data" *ngIf="!!entryData">
     <!-- Banner -->
     <div class="banners">
-      <ion-slides *ngIf="entryData.banners.length > 0" 
+      <ion-slides #slides *ngIf="entryData.banners.length > 0" 
         [loop]="entryData.banners.length > 1" 
         [pager]="entryData.banners.length > 1" 
         (ionSlideAutoplayStop)="autoPlay()"
